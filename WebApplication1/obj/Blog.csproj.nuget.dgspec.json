@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Yacine.DESKTOP-LH540K6\\source\\repos\\WebApplication1\\WebApplication1\\Blog.csproj": {}
+    "C:\\Users\\dihia.azzedine\\Desktop\\resources\\tpdotnet\\blog-dotnet\\WebApplication1\\Blog.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Yacine.DESKTOP-LH540K6\\source\\repos\\WebApplication1\\WebApplication1\\Blog.csproj": {
+    "C:\\Users\\dihia.azzedine\\Desktop\\resources\\tpdotnet\\blog-dotnet\\WebApplication1\\Blog.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Yacine.DESKTOP-LH540K6\\source\\repos\\WebApplication1\\WebApplication1\\Blog.csproj",
+        "projectUniqueName": "C:\\Users\\dihia.azzedine\\Desktop\\resources\\tpdotnet\\blog-dotnet\\WebApplication1\\Blog.csproj",
         "projectName": "Blog",
-        "projectPath": "C:\\Users\\Yacine.DESKTOP-LH540K6\\source\\repos\\WebApplication1\\WebApplication1\\Blog.csproj",
-        "packagesPath": "C:\\Users\\Yacine.DESKTOP-LH540K6\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Yacine.DESKTOP-LH540K6\\source\\repos\\WebApplication1\\WebApplication1\\obj\\",
+        "projectPath": "C:\\Users\\dihia.azzedine\\Desktop\\resources\\tpdotnet\\blog-dotnet\\WebApplication1\\Blog.csproj",
+        "packagesPath": "C:\\Users\\dihia.azzedine\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\dihia.azzedine\\Desktop\\resources\\tpdotnet\\blog-dotnet\\WebApplication1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Yacine.DESKTOP-LH540K6\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dihia.azzedine\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
