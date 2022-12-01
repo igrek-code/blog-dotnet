@@ -11,7 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 //builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
 //    .AddEntityFrameworkStores<AppDbContext>();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
+builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.Stores.MaxLengthForKeys = 128;
 })
