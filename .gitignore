@@ -4,6 +4,11 @@
 bin/*
 obj/*
 
+WebApplication1/obj/Debug/net6.0/
+
+WebApplication1/obj/
+
+WebApplication1/bin/Debug/net6.0/
 /WebApplication1/appsettings.json
 /WebApplication1/Blog.csproj
 /WebApplication1/bin/Debug/net6.0/AutoMapper.dll
