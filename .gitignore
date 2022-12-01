@@ -6,3 +6,9 @@ obj/*
 
 /WebApplication1/appsettings.json
 /WebApplication1/Blog.csproj
+/WebApplication1/bin/Debug/net6.0/AutoMapper.dll
+/WebApplication1/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/WebApplication1/Configurations/RoleConfiguration.cs
+/WebApplication1/obj/Debug/net6.0/Blog.assets.cache
+/WebApplication1/obj/Debug/net6.0/Blog.GeneratedMSBuildEditorConfig.editorconfig
+/WebApplication1/obj/Blog.csproj.EntityFrameworkCore.targets
