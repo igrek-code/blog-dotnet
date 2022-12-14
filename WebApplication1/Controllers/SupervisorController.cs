@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Entities;
 
-namespace Blog.Controllers
+namespace WebApplication1.Controllers
 {
     public class SupervisorController : Controller
     {
@@ -16,7 +16,12 @@ namespace Blog.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+        public async Task<IActionResult> UserRolesManage()
         {
             var users = await _userManager.Users.ToListAsync();
             var userRolesViewModel = new List<UserRolesViewModel>();
@@ -35,6 +40,76 @@ namespace Blog.Controllers
         private async Task<List<string>> GetUserRoles(User user)
         {
             return new List<string>(await _userManager.GetRolesAsync(user));
+        }
+
+        //[Authorize(Roles = "Supervisor")]
+        public async Task<IActionResult> RoleManage()
+        {
+            var roles = await _roleManager.Roles.ToListAsync();
+            return View(roles);
+        }
+        [HttpPost]
+        //[Authorize(Roles = "Supervisor")]
+        public async Task<IActionResult> AddRole(string roleName)
+        {
+            if (roleName != null)
+            {
+                await _roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
+            }
+            return RedirectToAction("RoleManage");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string roleId)
+        {
+            if (roleId != null)
+            {
+                IdentityRole role = await _roleManager.FindByIdAsync(roleId);
+                await _roleManager.DeleteAsync(role);
+            }
+            return RedirectToAction("RoleManage");
+        }
+
+        public async Task<IActionResult> SpecificUserRole(string userId)
+        {
+            ViewBag.userId = userId;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("Index");
+            }
+            ViewBag.UserName = user.UserName;
+            var model = new List<ManageUserRolesViewModel>();
+            foreach (var role in _roleManager.Roles)
+            {
+                var userRolesViewModel = new ManageUserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.Selected = true;
+                }
+                else
+                {
+                    userRolesViewModel.Selected = false;
+                }
+                model.Add(userRolesViewModel);
+            }
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> SpecificUserRole(List<ManageUserRolesViewModel> model, string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return View(model);
+            }
+
+            return RedirectToAction("SpecificUserRole");
         }
     }
 }
