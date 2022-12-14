@@ -1,4 +1,4 @@
-﻿namespace Bloogs.Models
+﻿namespace WebApplication1.Models
 {
     public class ManageUserRolesViewModel
     {
