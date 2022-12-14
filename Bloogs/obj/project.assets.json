@@ -10543,24 +10543,26 @@
     ]
   },
   "packageFolders": {
-    "/root/.nuget/packages/": {}
+    "C:\\Users\\Lydia\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/app/Bloogs.csproj",
+      "projectUniqueName": "C:\\Users\\Lydia\\Desktop\\Master 2\\DotNet\\blog-dotnet\\Bloogs\\Bloogs.csproj",
       "projectName": "Bloogs",
-      "projectPath": "/app/Bloogs.csproj",
-      "packagesPath": "/root/.nuget/packages/",
-      "outputPath": "/app/obj/",
+      "projectPath": "C:\\Users\\Lydia\\Desktop\\Master 2\\DotNet\\blog-dotnet\\Bloogs\\Bloogs.csproj",
+      "packagesPath": "C:\\Users\\Lydia\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Lydia\\Desktop\\Master 2\\DotNet\\blog-dotnet\\Bloogs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/root/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Lydia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -10625,7 +10627,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
