@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,85 +10,85 @@ using WebApplication1.Data;
 
 namespace Blog.Controllers
 {
-    public class BlogController : Controller
+    public class PostController : Controller
     {
         private readonly AppDbContext _context;
 
-        public BlogController(AppDbContext context)
+        public PostController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Blog
+        // GET: Post
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Blog.ToListAsync());
+              return View(await _context.Post.ToListAsync());
         }
 
-        // GET: Blog/Details/5
+        // GET: Post/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Blog == null)
+            if (id == null || _context.Post == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog
+            var post = await _context.Post
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (blog == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            return View(blog);
+            return View(post);
         }
 
-        // GET: Blog/Create
+        // GET: Post/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Blog/Create
+        // POST: Post/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsPublic")] Blog blog)
+        public async Task<IActionResult> Create([Bind("Id,Content,ImagesUrl")] Post post)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(blog);
+                _context.Add(post);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            return View(post);
         }
 
-        // GET: Blog/Edit/5
+        // GET: Post/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Blog == null)
+            if (id == null || _context.Post == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog.FindAsync(id);
-            if (blog == null)
+            var post = await _context.Post.FindAsync(id);
+            if (post == null)
             {
                 return NotFound();
             }
-            return View(blog);
+            return View(post);
         }
 
-        // POST: Blog/Edit/5
+        // POST: Post/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsPublic")] Blog blog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,ImagesUrl")] Post post)
         {
-            if (id != blog.Id)
+            if (id != post.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Blog.Controllers
             {
                 try
                 {
-                    _context.Update(blog);
+                    _context.Update(post);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BlogExists(blog.Id))
+                    if (!PostExists(post.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace Blog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            return View(post);
         }
 
-        // GET: Blog/Delete/5
+        // GET: Post/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Blog == null)
+            if (id == null || _context.Post == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog
+            var post = await _context.Post
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (blog == null)
+            if (post == null)
             {
                 return NotFound();
             }
 
-            return View(blog);
+            return View(post);
         }
 
-        // POST: Blog/Delete/5
+        // POST: Post/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Blog == null)
+            if (_context.Post == null)
             {
-                return Problem("Entity set 'AppDbContext.Blog'  is null.");
+                return Problem("Entity set 'AppDbContext.Post'  is null.");
             }
-            var blog = await _context.Blog.FindAsync(id);
-            if (blog != null)
+            var post = await _context.Post.FindAsync(id);
+            if (post != null)
             {
-                _context.Blog.Remove(blog);
+                _context.Post.Remove(post);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BlogExists(int id)
+        private bool PostExists(int id)
         {
-          return _context.Blog.Any(e => e.Id == id);
+          return _context.Post.Any(e => e.Id == id);
         }
     }
 }

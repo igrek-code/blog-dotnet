@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Entities;
+using Blog.Models;
 
 namespace WebApplication1.Data;
 
@@ -23,4 +24,10 @@ public class AppDbContext : IdentityDbContext<User>
         // Add your customizations after calling base.OnModelCreating(builder);
         builder.Seed();
     }
+
+    public DbSet<Blog.Models.Comment> Comment { get; set; }
+
+    public DbSet<Blog.Models.Post> Post { get; set; }
+
+    public DbSet<Blog.Models.Blog> Blog { get; set; }
 }

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,85 +10,85 @@ using WebApplication1.Data;
 
 namespace Blog.Controllers
 {
-    public class BlogController : Controller
+    public class CommentController : Controller
     {
         private readonly AppDbContext _context;
 
-        public BlogController(AppDbContext context)
+        public CommentController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: Blog
+        // GET: Comment
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Blog.ToListAsync());
+              return View(await _context.Comment.ToListAsync());
         }
 
-        // GET: Blog/Details/5
+        // GET: Comment/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Blog == null)
+            if (id == null || _context.Comment == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog
+            var comment = await _context.Comment
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (blog == null)
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return View(blog);
+            return View(comment);
         }
 
-        // GET: Blog/Create
+        // GET: Comment/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Blog/Create
+        // POST: Comment/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsPublic")] Blog blog)
+        public async Task<IActionResult> Create([Bind("Id,Content")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(blog);
+                _context.Add(comment);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            return View(comment);
         }
 
-        // GET: Blog/Edit/5
+        // GET: Comment/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Blog == null)
+            if (id == null || _context.Comment == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog.FindAsync(id);
-            if (blog == null)
+            var comment = await _context.Comment.FindAsync(id);
+            if (comment == null)
             {
                 return NotFound();
             }
-            return View(blog);
+            return View(comment);
         }
 
-        // POST: Blog/Edit/5
+        // POST: Comment/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsPublic")] Blog blog)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Content")] Comment comment)
         {
-            if (id != blog.Id)
+            if (id != comment.Id)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Blog.Controllers
             {
                 try
                 {
-                    _context.Update(blog);
+                    _context.Update(comment);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BlogExists(blog.Id))
+                    if (!CommentExists(comment.Id))
                     {
                         return NotFound();
                     }
@@ -113,49 +113,49 @@ namespace Blog.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(blog);
+            return View(comment);
         }
 
-        // GET: Blog/Delete/5
+        // GET: Comment/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Blog == null)
+            if (id == null || _context.Comment == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog
+            var comment = await _context.Comment
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (blog == null)
+            if (comment == null)
             {
                 return NotFound();
             }
 
-            return View(blog);
+            return View(comment);
         }
 
-        // POST: Blog/Delete/5
+        // POST: Comment/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Blog == null)
+            if (_context.Comment == null)
             {
-                return Problem("Entity set 'AppDbContext.Blog'  is null.");
+                return Problem("Entity set 'AppDbContext.Comment'  is null.");
             }
-            var blog = await _context.Blog.FindAsync(id);
-            if (blog != null)
+            var comment = await _context.Comment.FindAsync(id);
+            if (comment != null)
             {
-                _context.Blog.Remove(blog);
+                _context.Comment.Remove(comment);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool BlogExists(int id)
+        private bool CommentExists(int id)
         {
-          return _context.Blog.Any(e => e.Id == id);
+          return _context.Comment.Any(e => e.Id == id);
         }
     }
 }
