@@ -1,0 +1,13 @@
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.csproj.AssemblyReference.cache
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.Resources.Bloogs.resources
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.Resources.Bloogs.en-us.resources
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.Resources.Bloogs.fr-fr.resources
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.csproj.GenerateResource.cache
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.AssemblyInfoInputs.cache
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.AssemblyInfo.cs
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.csproj.CoreCompileInputs.cache
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.RazorAssemblyInfo.cache
+C:\Users\jessy\Documents\Cours\M2\Projets\.net\Blogs\Bloogs\obj\Debug\net6.0\Bloogs.RazorAssemblyInfo.cs
