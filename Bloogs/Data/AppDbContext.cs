@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Entities;
-using Blog.Models;
+using Bloogs.Models;
 
 namespace WebApplication1.Data;
 
@@ -25,9 +25,9 @@ public class AppDbContext : IdentityDbContext<User>
         builder.Seed();
     }
 
-    public DbSet<Blog.Models.Comment> Comment { get; set; }
+    public DbSet<Bloogs.Models.Comment> Comment { get; set; }
 
-    public DbSet<Blog.Models.Post> Post { get; set; }
+    public DbSet<Bloogs.Models.Post> Post { get; set; }
 
-    public DbSet<Blog.Models.Blog> Blog { get; set; }
+    public DbSet<Bloogs.Models.Blog> Blog { get; set; }
 }

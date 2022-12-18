@@ -9,7 +9,7 @@ using WebApplication1.Data;
 
 #nullable disable
 
-namespace Blog.Data.Migrations
+namespace Bloogs.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20221122181428_m1")]

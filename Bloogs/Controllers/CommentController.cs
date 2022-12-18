@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Blog.Models;
+using Bloogs.Models;
 using WebApplication1.Data;
 
-namespace Blog.Controllers
+namespace Bloogs.Controllers
 {
     public class CommentController : Controller
     {

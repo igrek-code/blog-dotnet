@@ -10543,19 +10543,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lydia\\.nuget\\packages\\": {}
+    "C:\\Users\\jessy\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lydia\\Desktop\\Master 2\\DotNet\\blog-dotnet\\Bloogs\\Bloogs.csproj",
+      "projectUniqueName": "C:\\Users\\jessy\\Documents\\Cours\\M2\\Projets\\.net\\Blogs\\Bloogs\\Bloogs.csproj",
       "projectName": "Bloogs",
-      "projectPath": "C:\\Users\\Lydia\\Desktop\\Master 2\\DotNet\\blog-dotnet\\Bloogs\\Bloogs.csproj",
-      "packagesPath": "C:\\Users\\Lydia\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lydia\\Desktop\\Master 2\\DotNet\\blog-dotnet\\Bloogs\\obj\\",
+      "projectPath": "C:\\Users\\jessy\\Documents\\Cours\\M2\\Projets\\.net\\Blogs\\Bloogs\\Bloogs.csproj",
+      "packagesPath": "C:\\Users\\jessy\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\jessy\\Documents\\Cours\\M2\\Projets\\.net\\Blogs\\Bloogs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Lydia\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\jessy\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Models;
 
-namespace Blog.Controllers
+namespace Bloogs.Controllers
 {
     public class HomeController : Controller
     {

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Blog {
+namespace Bloogs {
     using System;
     
     
