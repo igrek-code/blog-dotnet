@@ -8,5 +8,6 @@ public class Blog
     public string Name { get; set; }
     public User Owner { get; set; }
     public Boolean IsPublic { get; set; }
+    public List<Post> Posts { get; set; }
 
 }
