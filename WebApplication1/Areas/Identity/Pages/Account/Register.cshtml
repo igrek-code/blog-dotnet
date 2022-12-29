@@ -1,0 +1,70 @@
+﻿@page
+@model RegisterModel
+
+
+<h1>@ViewData["Title"]</h1>
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+
+                        <div class="mb-md-5 mt-md-4 pb-5">
+                            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <h2 class="fw-bold mb-2 text-uppercase">Inscription</h2>
+                                <p class="text-white-50 mb-5">Please enter your login and password!</p>
+
+
+
+
+                                <div class="form-outline form-white mb-4">
+                                    <input asp-for="Input.Email" class="form-control form-control-lg" autocomplete="username" aria-required="true" />
+                                    <label asp-for="Input.Email" class="form-label" for="typeEmailX">Email</label>
+                                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                 </div>
+
+
+
+                                <div class="form-outline form-white mb-4">
+                                    <input asp-for="Input.FirstName" class="form-control form-control-lg" autocomplete="firstname" aria-required="true" />
+                                    <label asp-for="Input.FirstName" class="form-label" for="typeEmailX">First name</label>
+                                    <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+                                 </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input asp-for="Input.LastName" class="form-control form-control-lg" autocomplete="lastname" aria-required="true" />
+                                    <label asp-for="Input.LastName" class="form-label">Last name</label>
+                                    <span asp-validation-for="Input.LastName" class="text-danger"></span>
+                                </div>
+
+
+                                <div class="form-outline form-white mb-4">
+                                    <input asp-for="Input.Password" class="form-control form-control-lg" autocomplete="new-password" aria-required="true" />
+                                    <label asp-for="Input.Password" class="form-label">Password</label>
+                                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                 </div>
+
+                                <div class="form-outline form-white mb-4">
+                                    <input asp-for="Input.ConfirmPassword" class="form-control form-control-lg" autocomplete="new-password" aria-required="true" />
+                                    <label asp-for="Input.ConfirmPassword" class="form-label">New password</label>
+                                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                                </div>
+
+                                <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
+                            </form>
+                         </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</section>
+                       
+   
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
