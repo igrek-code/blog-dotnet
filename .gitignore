@@ -17,3 +17,8 @@ Bloogs/bin/Debug/net6.0/
 /Bloogs/obj/Debug/net6.0/Blog.assets.cache
 /Bloogs/obj/Debug/net6.0/Blog.GeneratedMSBuildEditorConfig.editorconfig
 /Bloogs/obj/Blog.csproj.EntityFrameworkCore.targets
+
+Bloogs/bin/
+
+.idea/
+Bloogs/obj/Debug/net7.0/
