@@ -1,5 +1,4 @@
 ﻿using Bloogs.Data;
-using Bloogs.Data;
 using Bloogs.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
