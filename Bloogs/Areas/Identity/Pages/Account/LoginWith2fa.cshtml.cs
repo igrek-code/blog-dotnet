@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using WebApplication1.Entities;
+using Bloogs.Entities;
 
-namespace WebApplication1.Areas.Identity.Pages.Account
+namespace Bloogs.Areas.Identity.Pages.Account
 {
     public class LoginWith2faModel : PageModel
     {

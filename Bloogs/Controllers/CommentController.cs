@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
-using WebApplication1.Data;
+using Bloogs.Data;
 
 namespace Bloogs.Controllers
 {

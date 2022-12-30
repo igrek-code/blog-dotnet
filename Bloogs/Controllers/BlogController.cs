@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
-using WebApplication1.Data;
+using Bloogs.Data;
 
 namespace Bloogs.Controllers
 {
@@ -54,7 +54,7 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsPublic")] Blog blog)
+        public async Task<IActionResult> Create([Bind("Id,Name,IsPublic")] Models.Blog blog)
         {
             if (ModelState.IsValid)
             {

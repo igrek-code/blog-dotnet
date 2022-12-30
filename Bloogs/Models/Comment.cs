@@ -1,4 +1,4 @@
-﻿using WebApplication1.Entities;
+﻿using Bloogs.Entities;
 
 namespace Bloogs.Models;
 

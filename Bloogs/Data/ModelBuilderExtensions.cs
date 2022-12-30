@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Entities;
+using Bloogs.Entities;
 
-namespace Blog.Data
+namespace Bloogs.Data
 {
     public static class ModelBuilderExtensions
     {

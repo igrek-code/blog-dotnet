@@ -1,10 +1,10 @@
-﻿using WebApplication1.Models;
+﻿using Bloogs.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Entities;
+using Bloogs.Entities;
 
-namespace WebApplication1.Controllers
+namespace Bloogs.Controllers
 {
     public class SupervisorController : Controller
     {

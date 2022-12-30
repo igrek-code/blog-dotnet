@@ -1,11 +1,12 @@
-﻿using Code1stUsersRoles.Data;
+﻿using Bloogs.Data;
+using Bloogs.Data;
+using Bloogs.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using WebApplication1.Entities;
 using Bloogs.Models;
 
-namespace WebApplication1.Data;
+namespace Bloogs.Data;
 
 public class AppDbContext : IdentityDbContext<User>
 {
@@ -25,9 +26,9 @@ public class AppDbContext : IdentityDbContext<User>
         builder.Seed();
     }
 
-    public DbSet<Bloogs.Models.Comment> Comment { get; set; }
+    public DbSet<Comment> Comment { get; set; }
 
-    public DbSet<Bloogs.Models.Post> Post { get; set; }
+    public DbSet<Post> Post { get; set; }
 
-    public DbSet<Bloogs.Models.Blog> Blog { get; set; }
+    public DbSet<Blog> Blog { get; set; }
 }
