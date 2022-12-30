@@ -36,6 +36,8 @@ namespace Bloogs.Data
                 UserName = "supervisor",
                 Email = "supervisor@blog.fr",
                 EmailConfirmed = true,
+                FirstName = "Supervisor",
+                LastName = "Supervisor",
             };
             supervisorUser.NormalizedUserName = supervisorUser.UserName.ToUpper();
             supervisorUser.NormalizedEmail = supervisorUser.Email.ToUpper();
