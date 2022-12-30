@@ -1,4 +1,6 @@
 ﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Bloogs> Localizer
 @{
     ViewData["Title"] = "Role Manager";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +10,7 @@
     <div class="input-group">
         <input name="roleName" class="form-control w-25">
         <span class="input-group-btn">
-            <button class="btn btn-info">Add New Role</button>
+            <button class="btn btn-info">@Localizer["AddNewRole"]</button>
         </span>
     </div>
 </form>
@@ -31,7 +33,7 @@
                         <div class="input-group">
                             <input name="roleId" value="@role.Id" hidden>
                             <span class="input-group-btn">
-                                <button class="btn btn-danger">Delete</button>
+                                <button class="btn btn-danger">@Localizer["Delete"]</button>
                             </span>
                         </div>
                     </form>

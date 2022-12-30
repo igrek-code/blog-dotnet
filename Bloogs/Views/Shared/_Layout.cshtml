@@ -18,7 +18,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">WebApplication1</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bloogs</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -31,11 +31,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Supervisor" asp-action="Index">Supervisor</a>
@@ -44,8 +39,13 @@
                 </div>
                 
             </div>
-            <div class="col-md-3 text-right">
-                @await Html.PartialAsync("_SelectLanguagePartial")
+            <div class="d-flex justify-content-end">
+                <div style="margin-left: 10px">
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+                <div style="margin-left: 10px">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
             </div>
         </nav>
     </header>

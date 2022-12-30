@@ -1,4 +1,6 @@
 ﻿@using Bloogs.Models
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Bloogs> Localizer
 @model List<UserRolesViewModel>
 @{
     ViewData["Title"] = "UserRolesManage";
@@ -8,11 +10,11 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Roles</th>
-            <th>Action</th>
+            <th>@Localizer["FirstName"]</th>
+            <th>@Localizer["LastName"]</th>
+            <th>@Localizer["Email"]</th>
+            <th>@Localizer["Roles"]</th>
+            <th>@Localizer["Action"]</th>
         </tr>
     </thead>
     <tbody>
@@ -24,7 +26,7 @@
                 <td>@user.Email</td>
                 <td>@string.Join(" , ", user.Roles.ToList())</td>
                 <td>
-                    <a class="btn btn-primary" asp-controller="Supervisor" asp-action="SpecificUserRole" asp-route-userId="@user.UserId">Manage Roles</a>
+                    <a class="btn btn-primary" asp-controller="Supervisor" asp-action="SpecificUserRole" asp-route-userId="@user.UserId">@Localizer["ManageRoles"]</a>
                 </td>
             </tr>
         }
