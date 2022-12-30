@@ -12,8 +12,8 @@ using WebApplication1.Data;
 namespace Bloogs.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221122181428_m1")]
-    partial class m1
+    [Migration("20221201110453_m2")]
+    partial class m2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,17 +53,24 @@ namespace Bloogs.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "84fe08e2-a845-4030-b8d0-7aa03459ed24",
-                            ConcurrencyStamp = "680c11e8-4c2a-4963-9cd4-23110c0e94fa",
+                            Id = "47e9f11c-01e7-4e94-aa88-84ae3ad53df5",
+                            ConcurrencyStamp = "e6e0ca82-7077-4d02-929b-c708c8ee6890",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "8c437660-dc16-469f-919f-33625e7b4641",
-                            ConcurrencyStamp = "1dbd3a68-a412-4c81-87b5-74e0b136c773",
+                            Id = "76996480-dc14-414b-b789-0032d6ac07a7",
+                            ConcurrencyStamp = "ce702eae-39f6-4ed4-a4e8-350c2071e4a1",
                             Name = "User",
                             NormalizedName = "USER"
+                        },
+                        new
+                        {
+                            Id = "4c98ab8c-8649-4024-95ac-d232078635d1",
+                            ConcurrencyStamp = "352ecf84-aaf8-4d19-bc7d-987a41e74ae3",
+                            Name = "Supervisor",
+                            NormalizedName = "SUPERVISOR"
                         });
                 });
 
@@ -154,6 +161,13 @@ namespace Bloogs.Data.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "fc5cf58f-ac8f-4219-ab0a-a308b8361230",
+                            RoleId = "4c98ab8c-8649-4024-95ac-d232078635d1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -246,6 +260,24 @@ namespace Bloogs.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "fc5cf58f-ac8f-4219-ab0a-a308b8361230",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "2edb47b0-5e0d-46bd-ae15-ccc7b5575ea6",
+                            Email = "supervisor@blog.fr",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SUPERVISOR@BLOG.FR",
+                            NormalizedUserName = "SUPERVISOR",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC8g3lEz2aM3XqPtaFLY7Pndr9x/eiKks+WKpDHKNbwyg+Jkmlr5fusoSMBOsMauuA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "ec659c44-2bb5-4c14-9047-254f990d2310",
+                            TwoFactorEnabled = false,
+                            UserName = "supervisor"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
