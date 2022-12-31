@@ -132,6 +132,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="EditUserRole" xml:space="preserve">
+    <value>Edit</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>ID</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -165,11 +171,23 @@
   <data name="Register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
   <data name="RoleManagement" xml:space="preserve">
     <value>Role manager</value>
   </data>
+  <data name="RoleManageTitle" xml:space="preserve">
+    <value>Role Manager</value>
+  </data>
   <data name="Roles" xml:space="preserve">
     <value>Roles</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="UseRoleTitle" xml:space="preserve">
+    <value>User role</value>
   </data>
   <data name="UserRoleManagement" xml:space="preserve">
     <value>User role manager</value>

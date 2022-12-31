@@ -5,7 +5,7 @@
     ViewData["Title"] = "Role Manager";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h1>Role Manager</h1>
+<h1>@Localizer["RoleManageTitle"]</h1>
 <form method="post" asp-action="AddRole" asp-controller="Supervisor">
     <div class="input-group">
         <input name="roleName" class="form-control w-25">
@@ -17,9 +17,9 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Role</th>
-            <th>Action</th>
+            <th>@Localizer["Id"]</th>
+            <th>@Localizer["Role"]</th>
+            <th>@Localizer["Action"]</th>
         </tr>
     </thead>
     <tbody>
