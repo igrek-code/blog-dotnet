@@ -2,7 +2,7 @@
 @using Microsoft.Extensions.Localization
 @inject IStringLocalizer<Bloogs> Localizer
 @{
-    ViewData["Title"] = "Role Manager";
+    ViewData["Title"] = @Localizer["RoleManager"];
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>@Localizer["RoleManageTitle"]</h1>

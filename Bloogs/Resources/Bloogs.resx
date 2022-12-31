@@ -27,4 +27,52 @@
     <data name="Privacy" xml:space="preserve">
         <value>Confidentialité</value>
     </data>
+    <data name="Login" xml:space="preserve">
+        <value>Connexion</value>
+    </data>
+    <data name="Supervisor" xml:space="preserve">
+        <value>Superviseur</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Inscription</value>
+    </data>
+    <data name="Password" xml:space="preserve">
+        <value>Mot de passe</value>
+    </data>
+    <data name="ForgotPassword" xml:space="preserve">
+        <value>Mot de passe oublié ?</value>
+    </data>
+    <data name="ResendEmailConfirmation" xml:space="preserve">
+        <value>Renvoyer un mail de confirmation</value>
+    </data>
+    <data name="Remember" xml:space="preserve">
+        <value>Se souvenir de moi ?</value>
+    </data>
+    <data name="FirstName" xml:space="preserve">
+        <value>Prénom</value>
+    </data>
+    <data name="LastName" xml:space="preserve">
+        <value>Nom</value>
+    </data>
+    <data name="ConfirmPassword" xml:space="preserve">
+        <value>Confirmation du mot de passe</value>
+    </data>
+    <data name="CreateNewAccount" xml:space="preserve">
+        <value>Création nouveau compte</value>
+    </data>
+    <data name="AddNewRole" xml:space="preserve">
+        <value>Ajout rôle</value>
+    </data>
+    <data name="Delete" xml:space="preserve">
+        <value>Supprimer</value>
+    </data>
+    <data name="RoleManager" xml:space="preserve">
+        <value>Gestion rôle</value>
+    </data>
+    <data name="UserRoleManagement" xml:space="preserve">
+        <value>Gestion rôle utilisateur</value>
+    </data>
+    <data name="UserRole" xml:space="preserve">
+        <value>Rôle utilisateur</value>
+    </data>
 </root>
