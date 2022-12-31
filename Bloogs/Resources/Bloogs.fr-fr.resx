@@ -165,8 +165,14 @@
   <data name="ManageUserRoles" xml:space="preserve">
     <value>Gérer les rôles utilisateurs</value>
   </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Numéro de téléphone</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Confidentialité</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Créer un compte</value>
@@ -185,6 +191,9 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Valider</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
   </data>
   <data name="UseRoleTitle" xml:space="preserve">
     <value>Rôle utilisateur</value>

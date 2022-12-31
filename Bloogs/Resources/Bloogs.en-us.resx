@@ -165,8 +165,14 @@
   <data name="ManageUserRoles" xml:space="preserve">
     <value>Manage User Role</value>
   </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
   <data name="Privacy" xml:space="preserve">
     <value>Privacy</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
   </data>
   <data name="Register" xml:space="preserve">
     <value>Register</value>
@@ -185,6 +191,9 @@
   </data>
   <data name="Update" xml:space="preserve">
     <value>Validate</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
   </data>
   <data name="UseRoleTitle" xml:space="preserve">
     <value>User role</value>
