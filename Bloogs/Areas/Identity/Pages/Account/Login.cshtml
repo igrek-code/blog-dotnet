@@ -1,6 +1,8 @@
 ﻿@page
 @model LoginModel
 @using Microsoft.Extensions.Localization
+@using Bloogs
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @inject IStringLocalizer<Bloogs> Localizer
 @{
     ViewData["Title"] = "Log in";
@@ -28,7 +30,8 @@
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            @Localizer["Remember"]
+                            @* @Html.DisplayNameFor(m => m.Input.RememberMe) *@
                         </label>
                     </div>
                 </div>
@@ -40,7 +43,7 @@
                         <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["ForgotPassword"]</a>
                     </p>
                     <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["RegisterAsNewUser"]</a>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["Register"]</a>
                     </p>
                     <p>
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">@Localizer["ResendEmailConfirmation"]</a>
