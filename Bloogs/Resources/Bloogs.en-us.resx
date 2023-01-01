@@ -204,4 +204,55 @@
   <data name="UserRoleManagement" xml:space="preserve">
     <value>User role manager</value>
   </data>
+  <data name="TwoFactorAuth" xml:space="preserve">
+    <value>Two-factor authentication</value>
+  </data>
+  <data name="PersonalData" xml:space="preserve">
+    <value>Personal data</value>
+  </data>
+  <data name="AccountManager" xml:space="preserve">
+    <value>Manage your account</value>
+  </data>
+  <data name="ChangeAccountSettings" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>New email</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Change email</value>
+  </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Manage Email</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="PersonalDataMessage" xml:space="preserve">
+    <value>Your account contains personal data that you have given us. This page allows you to download or delete that data.</value>
+  </data>
+  <data name="PersonalDataWarningDeletingMessage" xml:space="preserve">
+    <value>Deleting this data will permanently remove your account, and this cannot be recovered.</value>
+  </data>
+  <data name="2FA" xml:space="preserve">
+    <value>Two-factor authentication (2FA)</value>
+  </data>
+  <data name="2FAApp" xml:space="preserve">
+    <value>Authenticator app</value>
+  </data>
+  <data name="2FAAdd" xml:space="preserve">
+    <value>Add authenticator app</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

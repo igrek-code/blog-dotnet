@@ -75,4 +75,55 @@
     <data name="UserRole" xml:space="preserve">
         <value>Rôle utilisateur</value>
     </data>
+    <data name="TwoFactorAuth" xml:space="preserve">
+        <value>Authentification à deux facteurs</value>
+    </data>
+    <data name="PersonalData" xml:space="preserve">
+        <value>Donnée personnelle</value>
+    </data>
+    <data name="AccountManager" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChangeAccountSettings" xml:space="preserve">
+        <value />
+    </data>
+    <data name="NewEmail" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChangeEmail" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ManageEmail" xml:space="preserve">
+        <value />
+    </data>
+    <data name="ChangePassword" xml:space="preserve">
+        <value />
+    </data>
+    <data name="OldPassword" xml:space="preserve">
+        <value />
+    </data>
+    <data name="NewPassword" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Download" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PersonalDataMessage" xml:space="preserve">
+        <value />
+    </data>
+    <data name="PersonalDataWarningDeletingMessage" xml:space="preserve">
+        <value />
+    </data>
+    <data name="2FA" xml:space="preserve">
+        <value />
+    </data>
+    <data name="2FAApp" xml:space="preserve">
+        <value />
+    </data>
+    <data name="2FAAdd" xml:space="preserve">
+        <value />
+    </data>
+    <data name="Save" xml:space="preserve">
+        <value />
+    </data>
 </root>
