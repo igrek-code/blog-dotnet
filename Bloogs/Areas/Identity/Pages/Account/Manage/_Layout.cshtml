@@ -1,4 +1,8 @@
-﻿@{
+﻿@using Microsoft.Extensions.Localization
+@using Bloogs
+@inject IStringLocalizer<Bloogs> Localizer
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout;
@@ -9,10 +13,10 @@
     }
 }
 
-<h1>Manage your account</h1>
+<h1>@Localizer["AccountManager"]</h1>
 
 <div>
-    <h2>Change your account settings</h2>
+    <h2>@Localizer["ChangeAccountSettings"]</h2>
     <hr />
     <div class="row">
         <div class="col-md-3">
