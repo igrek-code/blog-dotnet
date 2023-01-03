@@ -1,5 +1,9 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.Extensions.Localization
+@using Bloogs
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IStringLocalizer<Bloogs> Localizer
 @{
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
