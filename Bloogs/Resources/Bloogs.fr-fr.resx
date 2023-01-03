@@ -176,6 +176,7 @@
   </data>
   <data name="UseALocalAccountToLogin" xml:space="preserve">
     <value>Connexion à votre compte</value>
+  </data>
   <data name="Logout" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
