@@ -8,9 +8,6 @@
     ViewData["Title"] = "Profile";
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
-@using Microsoft.Extensions.Localization
-@using Bloogs
-@inject IStringLocalizer<Bloogs> Localizer
 
 <h3>@Localizer["Profile"]</h3>
 <partial name="_StatusMessage" for="StatusMessage" />
