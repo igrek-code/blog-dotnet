@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using MimeKit;
 using MimeKit.Text;
 using Bloogs.Entities;
+using System.Text.Encodings.Web;
 
 namespace Bloogs.Areas.Identity.Pages.Account
 {
@@ -47,13 +48,12 @@ namespace Bloogs.Areas.Identity.Pages.Account
         /// </summary>
         public string EmailConfirmationUrl { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string email, string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string email)
         {
             if (email == null)
             {
                 return RedirectToPage("/Index");
             }
-            returnUrl = returnUrl ?? Url.Content("~/");
 
             var user = await _userManager.FindByEmailAsync(email);
             if (user == null)
@@ -62,7 +62,6 @@ namespace Bloogs.Areas.Identity.Pages.Account
             }
 
             Email = email;
-            // Once you add a real email sender, you should remove this code that lets you confirm the account
           
             var emailMessage = new MimeMessage();
             //Confirmation link generation
@@ -72,7 +71,7 @@ namespace Bloogs.Areas.Identity.Pages.Account
             EmailConfirmationUrl = Url.Page(
                 "/Account/ConfirmEmail",
                 pageHandler: null,
-                values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                values: new { area = "Identity", userId = userId, code = code },
                 protocol: Request.Scheme);
 
             //Setup email message
@@ -80,7 +79,7 @@ namespace Bloogs.Areas.Identity.Pages.Account
             emailMessage.To.Add(MailboxAddress.Parse(email));
             emailMessage.Subject = "Registration Confirmation";
             emailMessage.Body = new TextPart(TextFormat.Html) { Text =
-                "Please confirm your account by clicking <a href=\"" + EmailConfirmationUrl + "\">here</a>"
+                "Please confirm your account by clicking <a href=\"" + HtmlEncoder.Default.Encode(EmailConfirmationUrl) + "\">here</a>"
             };
 
             // send email
