@@ -7,6 +7,9 @@ obj/*
 Bloogs/obj/Debug/net6.0/
 
 Bloogs/obj/
+Bloogs/.idea/*
+Bloogs/.vs/*
+Bloogs/bin/
 
 Bloogs/bin/Debug/net6.0/
 /Bloogs/appsettings.json
@@ -18,7 +21,10 @@ Bloogs/bin/Debug/net6.0/
 /Bloogs/obj/Debug/net6.0/Blog.GeneratedMSBuildEditorConfig.editorconfig
 /Bloogs/obj/Blog.csproj.EntityFrameworkCore.targets
 
-Bloogs/bin/
-
 .idea/
+.idea/*
 Bloogs/obj/Debug/net7.0/
+
+Bloogs/.vs/
+
+WebApplication1/
