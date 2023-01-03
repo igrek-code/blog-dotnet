@@ -276,4 +276,10 @@
   <data name="Password" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Renvoyer</value>
+  </data>
+  <data name="EnterEmail" xml:space="preserve">
+    <value>Entrez votre email</value>
+  </data>
 </root>

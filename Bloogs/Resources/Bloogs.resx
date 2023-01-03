@@ -126,4 +126,10 @@
     <data name="Save" xml:space="preserve">
         <value />
     </data>
+    <data name="Resend" xml:space="preserve">
+        <value />
+    </data>
+    <data name="EnterEmail" xml:space="preserve">
+        <value />
+    </data>
 </root>
