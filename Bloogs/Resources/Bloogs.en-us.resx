@@ -117,26 +117,47 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AddNewRole" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeUserRole" xml:space="preserve">
+    <value>Change role for user</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EditUserRole" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Home</value>
+  </data>
+  <data name="Id" xml:space="preserve">
+    <value>ID</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="Privacy" xml:space="preserve">
-    <value>Privacy</value>
+  <data name="LastName" xml:space="preserve">
+    <value>Last Name</value>
   </data>
   <data name="Login" xml:space="preserve">
     <value>Login</value>
-  </data>
-  <data name="Register" xml:space="preserve">
-    <value>Register</value>
-  </data>
-  <data name="Supervisor" xml:space="preserve">
-    <value>Supervisor</value>
-  </data>
-  <data name="Password" xml:space="preserve">
-    <value>Password</value>
   </data>
   <data name="ForgotPassword" xml:space="preserve">
     <value>Forgot your password ?</value>
@@ -147,12 +168,6 @@
   <data name="Remember" xml:space="preserve">
     <value>Remember me ?</value>
   </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Lastname</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>Firstname</value>
-  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
@@ -161,5 +176,103 @@
   </data>
   <data name="UseALocalAccountToLogin" xml:space="preserve">
     <value>Login to your account</value>
+  <data name="Logout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="ManageUserRoles" xml:space="preserve">
+    <value>Manage User Role</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone Number</value>
+  </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Role" xml:space="preserve">
+    <value>Role</value>
+  </data>
+  <data name="RoleManagement" xml:space="preserve">
+    <value>Role manager</value>
+  </data>
+  <data name="RoleManageTitle" xml:space="preserve">
+    <value>Role Manager</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="Supervisor" xml:space="preserve">
+    <value>Supervisor</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Validate</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>User Name</value>
+  </data>
+  <data name="UseRoleTitle" xml:space="preserve">
+    <value>User role</value>
+  </data>
+  <data name="UserRoleManagement" xml:space="preserve">
+    <value>User role manager</value>
+  </data>
+  <data name="TwoFactorAuth" xml:space="preserve">
+    <value>Two-factor authentication</value>
+  </data>
+  <data name="PersonalData" xml:space="preserve">
+    <value>Personal data</value>
+  </data>
+  <data name="AccountManager" xml:space="preserve">
+    <value>Manage your account</value>
+  </data>
+  <data name="ChangeAccountSettings" xml:space="preserve">
+    <value>Change your account settings</value>
+  </data>
+  <data name="NewEmail" xml:space="preserve">
+    <value>New email</value>
+  </data>
+  <data name="ChangeEmail" xml:space="preserve">
+    <value>Change email</value>
+  </data>
+  <data name="ManageEmail" xml:space="preserve">
+    <value>Manage Email</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="OldPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="PersonalDataMessage" xml:space="preserve">
+    <value>Your account contains personal data that you have given us. This page allows you to download or delete that data.</value>
+  </data>
+  <data name="PersonalDataWarningDeletingMessage" xml:space="preserve">
+    <value>Deleting this data will permanently remove your account, and this cannot be recovered.</value>
+  </data>
+  <data name="2FA" xml:space="preserve">
+    <value>Two-factor authentication (2FA)</value>
+  </data>
+  <data name="2FAApp" xml:space="preserve">
+    <value>Authenticator app</value>
+  </data>
+  <data name="2FAAdd" xml:space="preserve">
+    <value>Add authenticator app</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
   </data>
 </root>

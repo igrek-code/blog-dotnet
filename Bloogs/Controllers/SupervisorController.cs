@@ -108,8 +108,25 @@ namespace Bloogs.Controllers
             {
                 return View(model);
             }
+            var userRoleList = await _userManager.GetRolesAsync(user);
+            var roleToAdd = new List<String>();
+            var roleToRemove = new List<String>();
+            foreach (var role in model)
+            {
+                if (role.Selected && !userRoleList.Contains(role.RoleName))
+                {
+                    roleToAdd.Add(role.RoleName);
+                }
+                else if(!role.Selected && userRoleList.Contains(role.RoleName))
+                {
+                    roleToRemove.Add(role.RoleName);
+                }
+            }
 
-            return RedirectToAction("SpecificUserRole");
+            await _userManager.RemoveFromRolesAsync(user, roleToRemove);
+            await _userManager.AddToRolesAsync(user, roleToAdd);
+
+            return RedirectToAction("UserRolesManage");
         }
     }
 }

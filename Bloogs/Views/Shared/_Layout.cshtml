@@ -31,6 +31,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                         </li>
+                        @* </li> *@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">@Localizer["Login"]</a>
                         </li>
@@ -44,8 +45,13 @@
                 </div>
                 
             </div>
-            <div class="col-md-3 text-right">
-                @await Html.PartialAsync("_SelectLanguagePartial")
+            <div class="d-flex justify-content-end">
+                <div style="margin-left: 10px">
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+                <div style="margin-left: 10px">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
             </div>
         </nav>
     </header>
