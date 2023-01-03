@@ -3,9 +3,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
+using System.Data;
 
 namespace Bloogs.Controllers
 {
+    [Authorize(Roles = "Supervisor")]
     public class SupervisorController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -42,14 +45,12 @@ namespace Bloogs.Controllers
             return new List<string>(await _userManager.GetRolesAsync(user));
         }
 
-        //[Authorize(Roles = "Supervisor")]
         public async Task<IActionResult> RoleManage()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return View(roles);
         }
         [HttpPost]
-        //[Authorize(Roles = "Supervisor")]
         public async Task<IActionResult> AddRole(string roleName)
         {
             if (roleName != null)

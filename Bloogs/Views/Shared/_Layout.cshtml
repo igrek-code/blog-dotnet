@@ -1,9 +1,12 @@
 ﻿@using Bloogs
+@using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
 @using Microsoft.Extensions.Options
+@using Bloogs.Entities;
 @inject IStringLocalizer<Bloogs> Localizer
 @inject IOptions<RequestLocalizationOptions> LocOptions
+@inject SignInManager<User> SignInManager
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,9 +34,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Supervisor" asp-action="Index">Supervisor</a>
-                        </li>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Supervisor"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Supervisor" asp-action="Index">@Localizer["Supervisor"]</a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 
