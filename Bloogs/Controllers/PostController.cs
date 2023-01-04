@@ -56,6 +56,7 @@ namespace Bloogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,ImagesUrl")] Post post)
         {
+            post.DateCreated = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(post);

@@ -12,5 +12,6 @@ public class Post
     public User Poster { get; set; }
     public List<Comment>? Comments { get; set; }
     public List<User>? Likers { get; set; }
+    public DateTime DateCreated { get; set; }
 
 }
