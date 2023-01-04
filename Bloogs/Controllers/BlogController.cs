@@ -1,22 +1,27 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
+using Bloogs.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bloogs.Controllers
 {
     public class BlogController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public BlogController(AppDbContext context)
+        public BlogController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Blog
@@ -48,15 +53,33 @@ namespace Bloogs.Controllers
         {
             return View();
         }
+        
+        // GET: Blog/UserBlog
+        public async Task<IActionResult> UserBlog()
+        {
+            
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var blog = await _context.Blog
+                .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
+            if (blog == null)
+            {
+                return NotFound();
+            }
+
+            return View(blog);
+        }
 
         // POST: Blog/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsPublic")] Models.Blog blog)
+        public async Task<IActionResult> Create([Bind("Id,Name,IsPublic")] Blog blog)
         {
-            if (ModelState.IsValid)
+            blog.Owner = await _userManager.GetUserAsync(HttpContext.User);
+            blog.Posts = new List<Post>();
+            if (blog.Owner != null && blog.IsPublic != null && blog.Name != null && !blog.Name.Equals(""))
             {
                 _context.Add(blog);
                 await _context.SaveChangesAsync();

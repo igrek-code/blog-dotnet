@@ -132,4 +132,10 @@
     <data name="EnterEmail" xml:space="preserve">
         <value />
     </data>
+    <data name="Myblog" xml:space="preserve">
+        <value>Mon blog</value>
+    </data>
+    <data name="addpost" xml:space="preserve">
+        <value>Ajouter une publication</value>
+    </data>
 </root>

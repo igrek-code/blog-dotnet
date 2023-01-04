@@ -56,6 +56,17 @@ namespace Bloogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,ImagesUrl")] Post post)
         {
+            List<Models.Data> datasource = new List<Models.Data>();
+            datasource.Add(new Models.Data() { text = "Expand", value = 1 });
+            datasource.Add(new Models.Data() { text = "MultiRow", value = 2 });
+            ViewBag.data = datasource;
+            ViewBag.items = new[] {"Bold", "Italic", "Underline", "StrikeThrough",
+                "FontName", "FontSize", "FontColor", "BackgroundColor",
+                "LowerCase", "UpperCase", "|",
+                "Formats", "Alignments", "OrderedList", "UnorderedList",
+                "Outdent", "Indent", "|",
+                "CreateLink", "Image", "|", "ClearFormat", "Print",
+                "SourceCode", "FullScreen", "|", "Undo", "Redo" };
             if (ModelState.IsValid)
             {
                 _context.Add(post);
