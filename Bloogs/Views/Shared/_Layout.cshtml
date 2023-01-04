@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="~/Blogs.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header id="header">
+        <div class="fixed-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bloogs</a>
@@ -53,6 +54,7 @@
                 </div>
             </div>
         </nav>
+        </div>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -60,8 +62,8 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted" style="bottom:0; position: absolute; height: 100px;">
-        <div class="container">
+    <footer  id="myfooter" class="border-top footer text-muted" style="bottom:0; position: absolute; height: 100px;">
+        <div class="body-container">
             &copy; 2022 - Bloogs - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
         </div>
         
