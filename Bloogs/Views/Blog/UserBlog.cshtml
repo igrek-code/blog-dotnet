@@ -18,7 +18,20 @@
     <a asp-controller="Post" asp-action="Create">@Localizer["addpost"]</a>
 </div>
 <div>
-    <h4></h4>
-    <hr />
+    @foreach (var item in Model.Posts) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                @* <td> *@
+                @*     @Html.DisplayFor(modelItem => item.ImagesUrl) *@
+                @* </td> *@
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+    }
    
 </div>
