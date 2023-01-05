@@ -79,7 +79,7 @@ namespace Bloogs.Areas.Identity.Pages.Account
                 var emailMessage = new MimeMessage();
                 emailMessage.From.Add(MailboxAddress.Parse("from_address@example.com"));
                 emailMessage.To.Add(MailboxAddress.Parse(Input.Email));
-                emailMessage.Subject = "Registration Confirmation";
+                emailMessage.Subject = "Reset Password";
                 emailMessage.Body = new TextPart(TextFormat.Html)
                 {
                     Text =
