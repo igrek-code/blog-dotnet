@@ -18,6 +18,7 @@
     <a asp-controller="Post" asp-action="Create">@Localizer["addpost"]</a>
 </div>
 <div>
+    <table>
     @foreach (var item in Model.Posts) {
             <tr>
                 <td>
@@ -30,5 +31,6 @@
                 </td>
             </tr>
     }
+    </table>
    
 </div>

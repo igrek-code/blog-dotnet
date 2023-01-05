@@ -63,11 +63,11 @@ namespace Bloogs.Controllers
             
             var blog = await _context.Blog.Include(b => b.Posts).ThenInclude(p => p.Comments)
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
-              blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
             if (blog == null)
             {
                 return NotFound();
             }
+            blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
 
             return View(blog);
         }
