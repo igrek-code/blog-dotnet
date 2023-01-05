@@ -65,7 +65,7 @@ namespace Bloogs.Controllers
 
             var blog = await _context.Blog
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
-            post.ImagesUrl = "";
+            post.Title = "";
             post.Poster = user; 
             if (post != null && !post.Content.Equals(("")))
             {

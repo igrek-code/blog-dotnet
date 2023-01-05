@@ -1,27 +1,37 @@
 ﻿@model Post
-
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Bloogs> Localizer
 
 <form method="POST">
+  
+  
 
   <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+   <div class="form-outline mb-4">
+    <label class="form-label" >@Localizer["Title"]</label>
+    <div>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    </div>
   <div class="form-outline mb-4">
-      <label class="form-label" asp-for="Content"></label>
-      <div>
-        <textarea asp-for="Content" class="form-control" id="classic"></textarea>
-        <span asp-validation-for="Content" class="text-danger"></span>
-      </div>
+    <label class="form-label" >@Localizer["Content"]</label>
+    <div>
+      <textarea asp-for="Content" class="form-control" id="classic"></textarea>
+      <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
   </div>
- <input type="Submit" class="btn btn-primary" value="Create" />
+  <input type="Submit" class="btn btn-primary" value=@Localizer["Create"]>
 </form>
 
 @section Scripts{
      <script>
     
-          const demoBaseConfig = {
+          const baseConfig = {
             selector: 'textarea#classic',
-            language: 'sv_SE',
-            width: 755,
-            height: 500,
+            language: "fr_FR",
+            //width: 755,
+            //height: 500,
             resize: false,
             autosave_ask_before_unload: false,
             powerpaste_allow_local_images: true,
@@ -47,6 +57,6 @@
             content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
           };
           
-          tinymce.init(demoBaseConfig);
+          tinymce.init(baseConfig);
        </script>
 }

@@ -10,6 +10,7 @@ using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
 using Microsoft.AspNetCore.Identity;
+using Syncfusion.Blazor.Data;
 
 namespace Bloogs.Controllers
 {
@@ -59,9 +60,10 @@ namespace Bloogs.Controllers
         {
             
             var user = await _userManager.GetUserAsync(HttpContext.User);
-
+            
             var blog = await _context.Blog
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
+              blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
             if (blog == null)
             {
                 return NotFound();
