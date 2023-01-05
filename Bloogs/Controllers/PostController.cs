@@ -65,21 +65,23 @@ namespace Bloogs.Controllers
 
             var blog = await _context.Blog
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
-            post.ImagesUrl = "";
-            post.Poster = user; 
-            if (post != null && !post.Content.Equals(("")))
+            post.Title = "";
+            post.Poster = user;
+            if (post == null && post.Content.Equals(("")))
             {
-                if (blog.Posts == null)
-                {
-                    blog.Posts = new List<Post>(); 
-                }
-                blog.Posts.Add(post);
-                _context.Add(post);
-                _context.Update(blog);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return View(post);
             }
-            return View(post);
+
+            if (blog.Posts == null)
+            {
+                blog.Posts = new List<Post>(); 
+            }
+            blog.Posts.Add(post);
+            _context.Add(post);
+            _context.Update(blog);
+            await _context.SaveChangesAsync();
+            //return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserBlog", "Blog");
         }
 
         // GET: Post/Edit/5
