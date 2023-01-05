@@ -14,6 +14,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Bloogs.Entities;
+using MailKit.Security;
+using MimeKit.Text;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace Bloogs.Areas.Identity.Pages.Account
 {
@@ -71,10 +75,22 @@ namespace Bloogs.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //Setup email message
+                var emailMessage = new MimeMessage();
+                emailMessage.From.Add(MailboxAddress.Parse("from_address@example.com"));
+                emailMessage.To.Add(MailboxAddress.Parse(Input.Email));
+                emailMessage.Subject = "Registration Confirmation";
+                emailMessage.Body = new TextPart(TextFormat.Html)
+                {
+                    Text =
+                    "Please reset your password by clicking <a href=\"" + HtmlEncoder.Default.Encode(callbackUrl) + "\">here</a>"
+                };
+
+                // send email
+                using var smtp = new SmtpClient();
+                smtp.Connect("localhost", 1025, SecureSocketOptions.Auto);
+                smtp.Send(emailMessage);
+                smtp.Disconnect(true);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
