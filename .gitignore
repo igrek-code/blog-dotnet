@@ -4,10 +4,27 @@
 bin/*
 obj/*
 
-WebApplication1/obj/Debug/net6.0/
+Bloogs/obj/Debug/net6.0/
 
-WebApplication1/obj/
+Bloogs/obj/
+Bloogs/.idea/*
+Bloogs/.vs/*
+Bloogs/bin/
 
-WebApplication1/bin/Debug/net6.0/
-/WebApplication1/appsettings.json
-/WebApplication1/Blog.csproj
+Bloogs/bin/Debug/net6.0/
+/Bloogs/appsettings.json
+/Bloogs/Blog.csproj
+/Bloogs/bin/Debug/net6.0/AutoMapper.dll
+/Bloogs/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/Bloogs/Configurations/RoleConfiguration.cs
+/Bloogs/obj/Debug/net6.0/Blog.assets.cache
+/Bloogs/obj/Debug/net6.0/Blog.GeneratedMSBuildEditorConfig.editorconfig
+/Bloogs/obj/Blog.csproj.EntityFrameworkCore.targets
+
+.idea/
+.idea/*
+Bloogs/obj/Debug/net7.0/
+
+Bloogs/.vs/
+
+WebApplication1/

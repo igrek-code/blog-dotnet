@@ -1,0 +1,87 @@
+﻿@using Bloogs
+@using Bloogs.Controllers
+@using Microsoft.AspNetCore.Identity;
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.Extensions.Localization
+@using Microsoft.Extensions.Options
+@using Bloogs.Entities;
+@inject IStringLocalizer<Bloogs> Localizer
+@inject IOptions<RequestLocalizationOptions> LocOptions
+@inject SignInManager<User> SignInManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Blog</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="_content/Syncfusion.Blazor.Themes/bootstrap5.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Blogs.styles.css" asp-append-version="true" />
+    <script src="~/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
+    @RenderSection("mediumish", false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bloogs</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Index">@Localizer["Blog"]</a>
+                        </li>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Supervisor"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Supervisor" asp-action="Index">@Localizer["Supervisor"]</a>
+                            </li>
+                        }
+                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("User"))
+                         {
+                             <li class="nav-item">
+                                 <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="UserBlog">@Localizer["Myblog"]</a>
+                             </li>
+                         }
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="d-flex justify-content-end">
+                <div style="margin-left: 10px">
+                    @await Html.PartialAsync("_LoginPartial")
+                </div>
+                <div style="margin-left: 10px">
+                    @await Html.PartialAsync("_SelectLanguagePartial")
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted" style="bottom:0; position: absolute; height: 100px;">
+        <div class="container">
+            &copy; 2022 - Bloogs - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
+        </div>
+        
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
