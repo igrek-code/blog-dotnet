@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Entities;
 using Microsoft.AspNetCore.Authorization;
 using System.Data;
+using System.Reflection.Metadata;
+using Bloogs.Data;
 
 namespace Bloogs.Controllers
 {
@@ -13,11 +15,13 @@ namespace Bloogs.Controllers
     {
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly AppDbContext _context;
 
-        public SupervisorController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public SupervisorController(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, AppDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -102,7 +106,7 @@ namespace Bloogs.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> SpecificUserRole(List<ManageUserRolesViewModel> model, string userId)
+        public async Task<IActionResult> SpecificUserRole(List<ManageUserRolesViewModel> model, string userId, string name, bool isPublic)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -123,7 +127,31 @@ namespace Bloogs.Controllers
                     roleToRemove.Add(role.RoleName);
                 }
             }
+            if (roleToAdd.Contains("Admin"))
+            {
+                if (name != null && !name.Equals(""))
+                {
+                    var blog = new Blog();
+                    blog.Owner = user;
+                    blog.Posts = new List<Post>();
+                    if (blog.Owner != null && blog.Name != null && !blog.Name.Equals(""))
+                    {
+                        _context.Add(blog);
+                        await _context.SaveChangesAsync();
+                    }
+                }
+            }
+            if (roleToRemove.Contains("Admin"))
+            {
+                var blog = await _context.Blog
+                    .FirstOrDefaultAsync(m => m.Owner.Id == userId);
+                if (blog != null)
+                {
+                    _context.Blog.Remove(blog);
+                }
 
+                await _context.SaveChangesAsync();
+            }
             await _userManager.RemoveFromRolesAsync(user, roleToRemove);
             await _userManager.AddToRolesAsync(user, roleToAdd);
 
