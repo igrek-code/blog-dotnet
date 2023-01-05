@@ -1,39 +1,62 @@
 ﻿@model Post
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<Bloogs> Localizer
 
-@{
-    ViewData["Title"] = "Edit";
-}
+<form asp-action="Edit">
+  
+  
 
-<h1>Edit</h1>
-
-<h4>Post</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Content" class="control-label"></label>
-                <textarea asp-for="Content" class="form-control"></textarea>
-                <span asp-validation-for="Content" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+  <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+   <div class="form-outline mb-4">
+    <label class="form-label" >@Localizer["Title"]</label>
+    <div>
+    <input asp-for="Title" class="form-control" />
+    <span asp-validation-for="Title" class="text-danger"></span>
     </div>
-</div>
+    </div>
+  <div class="form-outline mb-4">
+    <label class="form-label" >@Localizer["Content"]</label>
+    <div>
+      <textarea asp-for="Content" class="form-control" id="classic"></textarea>
+      <span asp-validation-for="Content" class="text-danger"></span>
+    </div>
+  </div>
+  <input type="Submit" class="btn btn-primary" value=@Localizer["Edit"]>
+</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+     <script>
+    
+          const baseConfig = {
+            selector: 'textarea#classic',
+            language: "fr_FR",
+            //width: 755,
+            //height: 500,
+            resize: false,
+            autosave_ask_before_unload: false,
+            powerpaste_allow_local_images: true,
+            plugins: [
+              'a11ychecker', 'advcode', 'advlist',
+              'image', 'editimage', 'tinydrive', 'lists', 'link', 'media', 'powerpaste', 'preview',
+              'table', 'emoticons'
+            ],
+           
+            toolbar: 'insertfile a11ycheck undo redo | bold italic | forecolor backcolor |  alignleft aligncenter alignright alignjustify | bullist numlist | link image emoticons',
+            emoticons_append: {
+                custom_mind_explode: {
+                  keywords: ['brain', 'mind', 'explode', 'blown'],
+                  char: '🤯'
+                }
+              },
+            spellchecker_dialog: true,
+            spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+            tinydrive_demo_files_url: '../_images/tiny-drive-demo/demo_files.json',
+            tinydrive_token_provider: (success, failure) => {
+              success({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Ks_BdfH4CWilyzLNk8S2gDARFhuxIauLa8PwhdEQhEo' });
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+          };
+          
+          tinymce.init(baseConfig);
+       </script>
 }
