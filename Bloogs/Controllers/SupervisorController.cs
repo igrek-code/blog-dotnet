@@ -106,7 +106,7 @@ namespace Bloogs.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> SpecificUserRole(List<ManageUserRolesViewModel> model, string userId, string name, bool isPublic)
+        public async Task<IActionResult> SpecificUserRole(List<ManageUserRolesViewModel> model, string userId, string name, string isPublic)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
@@ -134,6 +134,14 @@ namespace Bloogs.Controllers
                     var blog = new Blog();
                     blog.Owner = user;
                     blog.Name = name;
+                    if (isPublic != null)
+                    {
+                        blog.IsPublic = true;
+                    }
+                    else
+                    {
+                        blog.IsPublic = false;
+                    }
                     if (blog.Owner != null && blog.Name != null && !blog.Name.Equals(""))
                     {
                         _context.Add(blog);
