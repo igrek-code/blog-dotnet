@@ -70,14 +70,15 @@
         </div>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="margin-top:8%">
             @RenderBody()
         </main>
     </div>
 
-    <footer  id="myfooter" class="border-top footer text-muted" style="bottom:0; position: absolute; height: 100px;">
+    <footer  id="myfooter" class="border-top footer text-muted" style="bottom:0; position: absolute; width : 100%; background-color: black; height: 100px;">
         <div class="body-container">
-            &copy; 2022 - Bloogs - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
+             <h2 style="text-align: center; color: white"> BLOOGS</h2>  
+            <a asp-area="" asp-controller="Home" asp-action="Privacy"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align:left">@Localizer["Privacy"]</a>
         </div>
         
     </footer>
