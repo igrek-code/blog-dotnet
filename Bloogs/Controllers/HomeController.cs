@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Bloogs.Models;
 using Bloogs.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bloogs.Controllers
 {
@@ -21,8 +22,11 @@ namespace Bloogs.Controllers
 
         public IActionResult Index()
         {
-            var blogs = _context.Blog.Where(b => b.IsPublic == true).ToList();
-            var posts = blogs.SelectMany(b => b.Posts).ToList();
+            var blogs = _context.Blog.Where(b => b.IsPublic == true)
+                .Include(b => b.Posts).ThenInclude(p => p.Poster)
+                .Include(b => b.Posts).ThenInclude(p => p.Comments)
+                .Include(b => b.Posts).ThenInclude(p => p.Likers).ToList();
+            var posts = blogs.SelectMany(b => b.Posts != null ? b.Posts : new List<Post>()).ToList();
 
             return View(posts);
         }
