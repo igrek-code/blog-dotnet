@@ -67,6 +67,7 @@ namespace Bloogs.Controllers
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
             post.Title = "";
             post.Poster = user;
+            post.DateCreated = DateTime.Now;
             if (post == null && post.Content.Equals(("")))
             {
                 return View(post);
