@@ -59,13 +59,12 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,ImagesUrl")] Post post)
+        public async Task<IActionResult> Create([Bind("Id,Content,Title")] Post post)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
             var blog = await _context.Blog
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
-            post.Title = "";
             post.Poster = user;
             post.DateCreated = DateTime.Now;
             if (post == null && post.Content.Equals(("")))
@@ -93,7 +92,10 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Post.Include(post1 => post1.Poster)
+                .Include(post1 => post1.blog)
+                .Include(post1 => post1.Comments)
+                .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
             if (post == null)
             {
                 return NotFound();
@@ -106,19 +108,26 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,ImagesUrl")] Post post)
+        public async Task<IActionResult> Edit(int id, Post post)
         {
             if (id != post.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (post != null && !post.Content.Equals(("")))
             {
                 try
                 {
-                    _context.Update(post);
+                    var newPost = await _context.Post.Include(post1 => post1.Poster)
+                        .Include(post1 => post1.blog)
+                        .Include(post1 => post1.Comments)
+                        .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
+                    newPost.Content = post.Content;
+                    newPost.Title = post.Title;
+                    _context.Update(newPost);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("UserBlog", "Blog");
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -131,7 +140,6 @@ namespace Bloogs.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(post);
         }

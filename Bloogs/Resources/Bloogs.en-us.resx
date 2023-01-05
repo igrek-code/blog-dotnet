@@ -312,4 +312,7 @@
 	<data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
   </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>
