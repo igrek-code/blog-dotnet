@@ -3,21 +3,28 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Bloogs.Models;
+using Bloogs.Data;
 
 namespace Bloogs.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly AppDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            AppDbContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var blogs = _context.Blog.Where(b => b.IsPublic == true).ToList();
+            var posts = blogs.SelectMany(b => b.Posts).ToList();
+
+            return View(posts);
         }
 
         public IActionResult Privacy()

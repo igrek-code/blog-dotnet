@@ -297,4 +297,19 @@
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
+	<data name="Intro" xml:space="preserve">
+    <value>You are on the best blog site in the world !</value>
+  </data>
+	<data name="PostByComments" xml:space="preserve">
+    <value>Most Commented Posts</value>
+  </data>
+	<data name="PostByDate" xml:space="preserve">
+    <value>Recent Posts</value>
+  </data>
+	<data name="PostByLikes" xml:space="preserve">
+    <value>Most Liked Posts</value>
+  </data>
+	<data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
 </root>
