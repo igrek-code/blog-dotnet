@@ -133,12 +133,13 @@ namespace Bloogs.Controllers
                 {
                     var blog = new Blog();
                     blog.Owner = user;
-                    blog.Posts = new List<Post>();
+                    blog.Name = name;
                     if (blog.Owner != null && blog.Name != null && !blog.Name.Equals(""))
                     {
                         _context.Add(blog);
                         await _context.SaveChangesAsync();
                     }
+
                 }
             }
             if (roleToRemove.Contains("Admin"))
