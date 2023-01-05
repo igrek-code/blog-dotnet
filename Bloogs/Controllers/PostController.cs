@@ -7,16 +7,21 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
+using Bloogs.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bloogs.Controllers
 {
     public class PostController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public PostController(AppDbContext context)
+
+        public PostController(AppDbContext context,UserManager<User> userManager )
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Post
@@ -56,9 +61,21 @@ namespace Bloogs.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Content,ImagesUrl")] Post post)
         {
-            if (ModelState.IsValid)
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var blog = await _context.Blog
+                .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
+            post.ImagesUrl = "";
+            post.Poster = user; 
+            if (post != null && !post.Content.Equals(("")))
             {
+                if (blog.Posts == null)
+                {
+                    blog.Posts = new List<Post>(); 
+                }
+                blog.Posts.Add(post);
                 _context.Add(post);
+                _context.Update(blog);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

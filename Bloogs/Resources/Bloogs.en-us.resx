@@ -282,4 +282,10 @@
   <data name="EnterEmail" xml:space="preserve">
     <value>Enter your email</value>
   </data>
+  <data name="Myblog" xml:space="preserve">
+    <value>My blog</value>
+  </data>
+  <data name="addpost" xml:space="preserve">
+    <value>Add a post</value>
+  </data>
 </root>
