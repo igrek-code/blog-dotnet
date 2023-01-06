@@ -9,6 +9,7 @@ using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
 using Microsoft.AspNetCore.Identity;
+using Bloogs.Views.Blog;
 
 namespace Bloogs.Controllers
 {
@@ -194,14 +195,15 @@ namespace Bloogs.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Post'  is null.");
             }
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Post.Include(p => p.Comments).FirstOrDefaultAsync();
             if (post != null)
             {
+                //_context.Comment.RemoveRange(post.Comments);
                 _context.Post.Remove(post);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserBlog", "Blog");
         }
 
         private bool PostExists(int id)
