@@ -38,13 +38,17 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var post = await _context.Post.Include(post1 => post1.Poster)
+                .Include(post1 => post1.blog)
+                .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
+                .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
             if (post == null)
             {
                 return NotFound();
             }
 
+            //ViewBag.Comment = new Comment();
+            ViewData["Comment"] = new Comment();
             return View(post);
         }
 
@@ -94,7 +98,7 @@ namespace Bloogs.Controllers
 
             var post = await _context.Post.Include(post1 => post1.Poster)
                 .Include(post1 => post1.blog)
-                .Include(post1 => post1.Comments)
+                .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
                 .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
             if (post == null)
             {
@@ -121,7 +125,7 @@ namespace Bloogs.Controllers
                 {
                     var newPost = await _context.Post.Include(post1 => post1.Poster)
                         .Include(post1 => post1.blog)
-                        .Include(post1 => post1.Comments)
+                        .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
                         .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
                     newPost.Content = post.Content;
                     newPost.Title = post.Title;
@@ -160,6 +164,28 @@ namespace Bloogs.Controllers
             }
 
             return View(post);
+        }
+        
+        // POST: Post/Like/5
+        public async Task<IActionResult> Like(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var post = await _context.Post.Include(post1 => post1.Poster)
+                    .Include(post1 => post1.blog)
+                    .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
+                    .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
+            if (post == null)
+            {
+                return NotFound();
+            }
+            post.Likers?.Add(user);
+            _context.Update(post);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Post", new {@id=post.Id});
         }
 
         // POST: Post/Delete/5

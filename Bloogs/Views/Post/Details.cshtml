@@ -1,30 +1,155 @@
-﻿@model Post
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using Bloogs.Entities
+@model Post
+@using Microsoft.Extensions.Localization
+@using Bloogs.Data
+@inject IStringLocalizer<Bloogs> Localizer
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject AppDbContext context
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
 <div>
-    <h4>Post</h4>
+    <h4>@Model.Poster.FirstName @Model.Poster.LastName</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
+         <dt class = "col-sm-2">
+             @Localizer["Title"]
+             </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Title)
+            </dd>
+        <dt class="col-sm-2">
+            @Localizer["Content"]
+        </dt>
+        <dd class="col-sm-10">
+            @Html.Raw(@Model?.Content)
         </dd>
+
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    @{
+        var p = context.Post.FirstOrDefault(m => m.Id == @Model.Id);
+        if (p.Likers.Count() == 1)
+        {
+            <span> @Localizer["Liked1"]</span> <br/>
+        }
+        else
+        {
+            if (p.Likers.Count() == 0)
+            {
+                <span> @Localizer["NoLikes"]</span> <br/>
+            }
+            else
+            {
+                <span> @p.Likers.Count() @Localizer["Liked"]</span> <br/>
+            }
+        }
+    }
+    @if (SignInManager.IsSignedIn(User))
+    {
+        var userId = UserManager.GetUserId(User);
+        if (userId != null)
+        {
+            var post = context.Post.FirstOrDefault(m => m.Id == @Model.Id);
+            var user = await UserManager.GetUserAsync(User);
+            if (post != null && post.Likers != null && !post.Likers.Contains(user))
+            {
+
+                <a asp-action="Like" asp-route-id="@Model?.Id"><i class="bi bi-hand-thumbs-up" style="font-size: 30px;"></i></a>
+                <br/>
+            }
+            else
+            {
+                <span ><i class="bi bi-hand-thumbs-up-fill" style="font-size: 30px;"></i></span>
+                <br/>
+            }
+
+            <form asp-controller="Comment" asp-action="Create" asp-route-id="@Model?.Id">
+                <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
+                <div class="form-outline mb-4">
+                    <label class="form-label h4">@Localizer["Comment"]</label>
+                    <div>
+                        @{
+                            var comment = new Comment();
+                            <textarea asp-for="@comment.Content" class="form-control" id="comms"></textarea>
+                            <span asp-validation-for="@comment.Content" class="text-danger"></span>
+                        }
+                    </div>
+                </div>
+                <input type="Submit" class="btn btn-primary" value=@Localizer["Envoyer"]>
+            </form>
+        }
+    }
+
+
+
+    @foreach (var comment in Model.Comments)
+    {
+        <div style="margin: 1em 1em 1em 1em">
+            <div class="card">
+                <dl class="row">
+
+                    <dt class="col-sm-10">
+                        @Html.Raw(comment.Owner.FirstName) @Html.Raw(comment.Owner.LastName) :
+                    </dt>
+
+                    <dd class="col-sm-10">
+                        @Html.Raw(comment.Content)
+                    </dd>
+
+                </dl>
+            </div>
+            </div>
+    }
+    {
+
+    }
+
     <a asp-action="Index">Back to List</a>
+
+
 </div>
+
+@section Scripts{
+     <script>
+    
+          const baseConfig = {
+            selector: 'textarea#comms',
+            language: "fr_FR",
+            //width: 755,
+            height: 200,
+            resize: false,
+            autosave_ask_before_unload: false,
+            powerpaste_allow_local_images: true,
+            plugins: [
+              'a11ychecker', 'advcode', 'advlist',
+              'image', 'editimage', 'tinydrive', 'lists', 'link', 'media', 'powerpaste', 'preview',
+              'table', 'emoticons'
+            ],
+           
+            toolbar: 'insertfile a11ycheck undo redo | bold italic | forecolor backcolor |  alignleft aligncenter alignright alignjustify | bullist numlist | link image emoticons',
+            emoticons_append: {
+                custom_mind_explode: {
+                  keywords: ['brain', 'mind', 'explode', 'blown'],
+                  char: '🤯'
+                }
+              },
+            spellchecker_dialog: true,
+            spellchecker_ignore_list: ['Ephox', 'Moxiecode'],
+            tinydrive_demo_files_url: '../_images/tiny-drive-demo/demo_files.json',
+            tinydrive_token_provider: (success, failure) => {
+              success({ token: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJqb2huZG9lIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.Ks_BdfH4CWilyzLNk8S2gDARFhuxIauLa8PwhdEQhEo' });
+            },
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:16px }'
+          };
+          
+          tinymce.init(baseConfig);
+       </script>
+}
