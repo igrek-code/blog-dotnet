@@ -111,18 +111,21 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsPublic")] Blog blog)
+        public async Task<IActionResult> Edit(int id, Blog blog)
         {
             if (id != blog.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (blog != null && !blog.Name.Equals(""))
             {
                 try
                 {
-                    _context.Update(blog);
+                    var newBlog = await _context.Blog.FindAsync(id);
+                    newBlog.Name = blog.Name;
+                    newBlog.IsPublic = blog.IsPublic; 
+                    _context.Update(newBlog);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
