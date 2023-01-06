@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Bloogs.Views.Blog;
 
 namespace Bloogs.Controllers
 {
+    [Authorize(Roles = "Admin, User, Supervisor")]
     public class PostController : Controller
     {
         private readonly AppDbContext _context;
