@@ -8,10 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Bloogs.Views.Blog;
 
 namespace Bloogs.Controllers
 {
+    [Authorize(Roles = "Admin, User, Supervisor")]
     public class PostController : Controller
     {
         private readonly AppDbContext _context;
@@ -46,9 +49,6 @@ namespace Bloogs.Controllers
             {
                 return NotFound();
             }
-
-            //ViewBag.Comment = new Comment();
-            ViewData["Comment"] = new Comment();
             return View(post);
         }
 
@@ -197,14 +197,15 @@ namespace Bloogs.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Post'  is null.");
             }
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Post.Include(p => p.Comments).FirstOrDefaultAsync();
             if (post != null)
             {
+                //_context.Comment.RemoveRange(post.Comments);
                 _context.Post.Remove(post);
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserBlog", "Blog");
         }
 
         private bool PostExists(int id)

@@ -17,21 +17,15 @@
 <div>
     <h4>@Model.Poster.FirstName @Model.Poster.LastName</h4>
     <hr />
-    <dl class="row">
-         <dt class = "col-sm-2">
-             @Localizer["Title"]
-             </dt>
-        <dd class = "col-sm-10 h4">
+    <div class="row">
+        
+        <div class = "col-sm-10 h4">
             @Html.DisplayFor(model => model.Title)
-            </dd>
-        <dt class="col-sm-2">
-            @Localizer["Content"]
-        </dt>
-        <dd class="col-sm-10">
+            </div>
+        <div class="col-sm-10">
             @Html.Raw(@Model?.Content)
-        </dd>
-
-    </dl>
+        </div>
+    </div>
 </div>
 <div>
     @{
@@ -106,10 +100,10 @@
 
                 </dl>
             </div>
-            </div>
+        </div>
     }
 
-    <a asp-action="Index">Back to List</a>
+    <a class="btn btn-primary" asp-area="" asp-controller="Home" asp-action="Index">@Localizer["Home"]</a>
 
 
 </div>

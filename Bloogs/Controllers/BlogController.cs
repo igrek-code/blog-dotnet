@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Syncfusion.Blazor.Data;
 
@@ -18,19 +19,21 @@ namespace Bloogs.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public BlogController(AppDbContext context, UserManager<User> userManager)
+        public BlogController(AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
-
+        
         // GET: Blog
         public async Task<IActionResult> Index()
         {
               return View(await _context.Blog.ToListAsync());
         }
-
+        
         // GET: Blog/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,11 +52,13 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Supervisor")]
         // GET: Blog/Create
         public IActionResult Create()
         {
             return View();
         }
+        
         
         // GET: Blog/UserBlog
         public async Task<IActionResult> UserBlog()
@@ -72,6 +77,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Supervisor")]
         // POST: Blog/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,23 +95,34 @@ namespace Bloogs.Controllers
             }
             return View(blog);
         }
-
+        
+        [Authorize(Roles = "Admin,Supervisor")]
         // GET: Blog/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+                return NotFound();
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles == null || (!roles.Contains("Admin") && !roles.Contains("Supervisor")) )
+                return RedirectToAction("Index", "Blog");
+
             if (id == null || _context.Blog == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog.FindAsync(id);
-            if (blog == null)
-            {
-                return NotFound();
-            }
-            return View(blog);
+            var blog = await _context.Blog.Include(b => b.Owner).FirstOrDefaultAsync(m => m.Id == id);
+
+            if(roles.Contains("Supervisor") || user.Id == blog.Owner.Id)
+                return View(blog);
+
+ 
+            return NotFound();
+ 
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Blog/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -144,6 +161,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Admin,Supervisor")]
         // GET: Blog/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -162,6 +180,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Admin,Supervisor")]
         // POST: Blog/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
