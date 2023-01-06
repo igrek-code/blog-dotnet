@@ -11,24 +11,20 @@
     ViewData["Title"] = "My blog";
 }
 
-<h1>@Html.DisplayFor(model => model.Name)</h1>
+<h1>@Html.DisplayFor(model => model.Name) <a class="btn btn-primary" asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>  
+    <a class="btn btn-primary" asp-controller="Post" asp-action="Create">@Localizer["addpost"]</a> </h1>
 
-
-<div>
-    <a asp-controller="Post" asp-action="Create">@Localizer["addpost"]</a>
-</div>
 <div>
     <table>
     @foreach (var item in Model.Posts) {
             <tr>
-                <td>
-                    @Html.Raw(item.Content)
+                <td class="h4">
+                    @Html.Raw(item.Title)
                 </td>
                 <td>
-                    <a asp-controller="Post" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-controller="Post" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id">Delete</a> 
-                    
+                    <a class="btn btn-primary" asp-controller="Post" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> 
+                    <a class="btn btn-primary" asp-controller="Post" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-three-dots-vertical"></i></a> 
+                    <a class="btn btn-danger" asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3-fill"></i></a>
                 </td>
             </tr>
     }

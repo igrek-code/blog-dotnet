@@ -168,4 +168,7 @@
     <data name="NoLikes" xml:space="preserve">
         <value>Aucun j'aime</value>
     </data>
+    <data name="Cancel" xml:space="preserve">
+        <value>Annuler</value>
+    </data>
 </root>

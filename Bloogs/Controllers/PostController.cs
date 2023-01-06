@@ -46,9 +46,6 @@ namespace Bloogs.Controllers
             {
                 return NotFound();
             }
-
-            //ViewBag.Comment = new Comment();
-            ViewData["Comment"] = new Comment();
             return View(post);
         }
 
