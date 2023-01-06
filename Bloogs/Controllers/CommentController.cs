@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
+using Bloogs.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bloogs.Controllers
 {
     public class CommentController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public CommentController(AppDbContext context)
+        public CommentController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager; 
         }
 
         // GET: Comment
@@ -54,13 +58,21 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Id,Content")] Comment comment, int id)
         {
-            if (ModelState.IsValid)
+            if (comment != null && !comment.Content.Equals(""))
             {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var post = await _context.Post.Include(post1 => post1.Poster)
+                    .Include(post1 => post1.blog)
+                    .Include(post1 => post1.Comments)
+                    .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
+                comment.Owner = user; 
+                post.Comments.Add(comment);
                 _context.Add(comment);
+                _context.Update(post);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Post", new {@id=post.Id});
             }
             return View(comment);
         }

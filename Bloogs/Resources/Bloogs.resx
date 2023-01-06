@@ -150,4 +150,22 @@
     <data name="Edit" xml:space="preserve">
         <value>Modifier</value>
     </data>
+    <data name="Liked" xml:space="preserve">
+        <value>personnes ont aimé</value>
+    </data>
+    <data name="Like" xml:space="preserve">
+        <value>Aimer</value>
+    </data>
+    <data name="Envoyer" xml:space="preserve">
+        <value>Envoyer</value>
+    </data>
+    <data name="Comment" xml:space="preserve">
+        <value>Commentaires</value>
+    </data>
+    <data name="Liked1" xml:space="preserve">
+        <value>Une personne à aimé</value>
+    </data>
+    <data name="NoLikes" xml:space="preserve">
+        <value>Aucun j'aime</value>
+    </data>
 </root>

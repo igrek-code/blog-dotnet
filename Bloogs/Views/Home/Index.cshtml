@@ -29,8 +29,8 @@
                     <div class="card">
                         <div class="card-block">
                             <h2 class="card-title">
-                                @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id}, null)
-                                
+                                @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, null)
+
                             </h2>
                             <h4 class="card-text">
                                 
@@ -60,7 +60,7 @@
                     <div class="card">
                         <div class="card-block">
                             <h2 class="card-title">
-                                <a href="post.html">Autumn doesn't have to be nostalgic, you know?</a>
+                                @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, null)
                             </h2>
                             <h4 class="card-text">
                                 @Html.Raw(post.Content)
@@ -90,10 +90,10 @@
                     <div class="card">
                         <div class="card-block">
                             <h2 class="card-title">
-                                <a href="post.html">Autumn doesn't have to be nostalgic, you know?</a>
+                                @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, null)
                             </h2>
                             <h4 class="card-text">
-                                @Html.DisplayFor(modelItem => post.Content)
+                                @Html.Raw(post.Content)
                             </h4>
                             <div class="metafooter">
                                 <div class="wrapfooter">
