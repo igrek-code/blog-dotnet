@@ -19,11 +19,13 @@ namespace Bloogs.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public BlogController(AppDbContext context, UserManager<User> userManager)
+        public BlogController(AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             _context = context;
             _userManager = userManager;
+            _roleManager = roleManager;
         }
         
         // GET: Blog
@@ -98,17 +100,26 @@ namespace Bloogs.Controllers
         // GET: Blog/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null)
+                return NotFound();
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles == null || (!roles.Contains("Admin") && !roles.Contains("Supervisor")) )
+                return RedirectToAction("Index", "Blog");
+
             if (id == null || _context.Blog == null)
             {
                 return NotFound();
             }
 
-            var blog = await _context.Blog.FindAsync(id);
-            if (blog == null)
-            {
-                return NotFound();
-            }
-            return View(blog);
+            var blog = await _context.Blog.Include(b => b.Owner).FirstOrDefaultAsync(m => m.Id == id);
+
+            if(roles.Contains("Supervisor") || user.Id == blog.Owner.Id)
+                return View(blog);
+
+ 
+            return NotFound();
+ 
         }
 
         [Authorize(Roles = "Admin")]
