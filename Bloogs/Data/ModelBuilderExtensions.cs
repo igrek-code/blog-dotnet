@@ -8,7 +8,7 @@ namespace Bloogs.Data
     {
         public static void Seed(this ModelBuilder builder)
         {
-            var pwd = "admin";
+            var pwd = "AlphaDuSantor14*";
             var passwordHasher = new PasswordHasher<User>();
 
             // Seed Roles
@@ -33,7 +33,7 @@ namespace Bloogs.Data
             // Seed Users
             var supervisorUser = new User
             {
-                UserName = "supervisor",
+                UserName = "supervisor@blog.fr",
                 Email = "supervisor@blog.fr",
                 EmailConfirmed = true,
                 FirstName = "Supervisor",

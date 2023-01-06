@@ -74,7 +74,6 @@ using (var scope = app.Services.CreateScope())
 
     var context = services.GetRequiredService<AppDbContext>();
     var userService = services.GetRequiredService<IUserService>();
-    context.Database.Migrate();
     await userService.SuperVisorAccountSeed();
 }
 

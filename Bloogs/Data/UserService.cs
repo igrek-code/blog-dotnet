@@ -16,19 +16,21 @@ namespace Bloogs.Data
             var password = "admin";
 
             // Seed Users
-            var supervisorUser = new User
-            {
-                //Email = "supervisor@blog.fr",
-                EmailConfirmed = true,
-                FirstName = "Supervisor",
-                LastName = ""
-            };
+            // var supervisorUser = new User
+            // {
+            //     //Email = "supervisor@blog.fr",
+            //     EmailConfirmed = true,
+            //     FirstName = "Supervisor2",
+            //     LastName = ""
+            // };
+            var supervisorUser = await _signInManager.UserManager.FindByEmailAsync("supervisor@blog.fr");
             await _signInManager.UserManager.SetUserNameAsync(supervisorUser, "supervisor@blog.fr");
             await _signInManager.UserManager.SetEmailAsync(supervisorUser, "supervisor@blog.fr");
+           
+            
+            //var result = await _signInManager.UserManager.CreateAsync(supervisorUser, password);
 
-            var result = await _signInManager.UserManager.CreateAsync(supervisorUser, password);
-
-            await _signInManager.UserManager.AddToRoleAsync(supervisorUser, "Supervisor");
+            //await _signInManager.UserManager.AddToRoleAsync(supervisorUser, "Supervisor");
 
             var token = await _signInManager.UserManager.GenerateEmailConfirmationTokenAsync(supervisorUser);
 
