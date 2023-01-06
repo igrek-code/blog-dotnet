@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Syncfusion.Blazor.Data;
 
@@ -24,13 +25,13 @@ namespace Bloogs.Controllers
             _context = context;
             _userManager = userManager;
         }
-
+        
         // GET: Blog
         public async Task<IActionResult> Index()
         {
               return View(await _context.Blog.ToListAsync());
         }
-
+        
         // GET: Blog/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -49,11 +50,13 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Supervisor")]
         // GET: Blog/Create
         public IActionResult Create()
         {
             return View();
         }
+        
         
         // GET: Blog/UserBlog
         public async Task<IActionResult> UserBlog()
@@ -72,6 +75,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Supervisor")]
         // POST: Blog/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -89,7 +93,8 @@ namespace Bloogs.Controllers
             }
             return View(blog);
         }
-
+        
+        [Authorize(Roles = "Admin,Supervisor")]
         // GET: Blog/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -106,6 +111,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Admin")]
         // POST: Blog/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -144,6 +150,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Admin,Supervisor")]
         // GET: Blog/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -162,6 +169,7 @@ namespace Bloogs.Controllers
             return View(blog);
         }
 
+        [Authorize(Roles = "Admin,Supervisor")]
         // POST: Blog/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace Bloogs.Controllers
 {
+    [Authorize(Roles = "Admin, User, Supervisor")]
     public class CommentController : Controller
     {
         private readonly AppDbContext _context;
