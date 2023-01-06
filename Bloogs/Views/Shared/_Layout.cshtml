@@ -24,7 +24,7 @@
     <script src="~/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     @RenderSection("mediumish", false)
 </head>
-<body>
+<>
     <header id="header">
         <div class="fixed-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -79,12 +79,12 @@
         </div>
     </header>
     <div class="container">
-        <main role="main" class="pb-3" style="margin-top:8%">
+        <main role="main" class="pb-3" style="margin-top:8%; margin-bottom: 9%">
             @RenderBody()
         </main>
     </div>
 
-    <footer  id="myfooter" class="border-top footer text-muted" style="bottom:0; position: absolute; width : 100%; background-color: black; height: 100px;">
+    <footer class="border-top footer text-muted" style="bottom:0; position: fixed; width : 100%; background-color: black; height: 8%;">
         <div class="body-container">
              <h2 style="text-align: center; color: white"> BLOOGS</h2>  
             <a asp-area="" asp-controller="Home" asp-action="Privacy"  style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; text-align:left">@Localizer["Privacy"]</a>
@@ -95,5 +95,5 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-</body>
+
 </html>

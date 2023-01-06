@@ -8,44 +8,44 @@
     ViewData["Title"] = @Localizer["Register"];
 }
 
-<section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
+<section class="gradient-custom">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
             <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                    <div class="card-body p-5 text-center">
+                    <div class="card-body p-4 text-center">
 
                         <div class="mb-md-2 mt-md-4 pb-2">
                             <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                                 <h2 class="fw-bold mb-2 text-uppercase">@Localizer["Register"]</h2>
-                                <p class="text-white-50 mb-5">@Localizer["CreateNewAccount"]</p>
+                                <p class="text-white-50 mb-4">@Localizer["CreateNewAccount"]</p>
                                 
-                                <div class="form-outline form-white mb-4">
+                                <div class="form-outline form-white ">
                                     <input asp-for="Input.Email" class="form-control form-control-lg" autocomplete="username" aria-required="true" />
                                     <label asp-for="Input.Email" class="form-label" for="typeEmailX">@Localizer["Email"]</label>
                                     <span asp-validation-for="Input.Email" class="text-danger"></span>
                                  </div>
 
-                                <div class="form-outline form-white mb-4">
+                                <div class="form-outline form-white ">
                                     <input asp-for="Input.FirstName" class="form-control form-control-lg" autocomplete="firstname" aria-required="true" />
                                     <label asp-for="Input.FirstName" class="form-label" for="typeEmailX">@Localizer["FirstName"]</label>
                                     <span asp-validation-for="Input.FirstName" class="text-danger"></span>
                                  </div>
 
-                                <div class="form-outline form-white mb-4">
+                                <div class="form-outline form-white ">
                                     <input asp-for="Input.LastName" class="form-control form-control-lg" autocomplete="lastname" aria-required="true" />
                                     <label asp-for="Input.LastName" class="form-label">@Localizer["LastName"]</label>
                                     <span asp-validation-for="Input.LastName" class="text-danger"></span>
                                 </div>
 
 
-                                <div class="form-outline form-white mb-4">
+                                <div class="form-outline form-white ">
                                     <input asp-for="Input.Password" class="form-control form-control-lg" autocomplete="new-password" aria-required="true" />
                                     <label asp-for="Input.Password" class="form-label">@Localizer["Password"]</label>
                                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                                  </div>
 
-                                <div class="form-outline form-white mb-4">
+                                <div class="form-outline form-white ">
                                     <input asp-for="Input.ConfirmPassword" class="form-control form-control-lg" autocomplete="new-password" aria-required="true" />
                                     <label asp-for="Input.ConfirmPassword" class="form-label">@Localizer["ConfirmPassword"]</label>
                                     <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
