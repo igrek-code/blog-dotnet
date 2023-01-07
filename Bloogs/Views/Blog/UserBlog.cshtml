@@ -1,33 +1,79 @@
-@using Bloogs.Entities
-@using Microsoft.AspNetCore.Identity
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
 @using Microsoft.Extensions.Options
+@using Bloogs.Entities
+@using Microsoft.AspNetCore.Identity
 @model Blog
 @inject IStringLocalizer<Bloogs> Localizer
 @inject IOptions<RequestLocalizationOptions> LocOptions
 
 @{
-    ViewData["Title"] = "My blog";
+    ViewData["Title"] = "blog";
 }
 
-<h1>@Html.DisplayFor(model => model.Name) <a class="btn btn-primary" asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>  
-    <a class="btn btn-primary" asp-controller="Post" asp-action="Create">@Localizer["addpost"]</a> </h1>
+@{
+    var user = await UserManager.GetUserAsync(User);
+    @if (SignInManager.IsSignedIn(User) && Model.Owner == user )
+    {
+        <h1>@Html.DisplayFor(model => model.Name) <a class="btn btn-primary" asp-controller="Blog" asp-action="Edit" asp-route-id="@Model.Id"><i class="bi bi-pencil-square"></i></a>
+                <a class="btn btn-primary" asp-controller="Post" asp-action="Create">@Localizer["addpost"]</a> </h1>
+        <hr/>
+            <div>
+                <table>
+                    @foreach (var item in Model.Posts)
+                    {
+                        <tr>
+                            <td class="h4" style="width: 60%">
+                                @Html.Raw(item.Title)
+                                <hr/>
+                            </td>
+                            <td>
+                                <a class="btn btn-primary" asp-controller="Post" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
+                                <a class="btn btn-primary" asp-controller="Post" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-three-dots-vertical"></i></a>
+                                <a class="btn btn-danger" asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3-fill"></i></a>
+                                
+                            </td>
+                        </tr>
+                        
+                    }
+                </table>
 
-<div>
-    <table>
-    @foreach (var item in Model.Posts) {
-            <tr>
-                <td class="h4">
-                    @Html.Raw(item.Title)
-                </td>
-                <td>
-                    <a class="btn btn-primary" asp-controller="Post" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a> 
-                    <a class="btn btn-primary" asp-controller="Post" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-three-dots-vertical"></i></a> 
-                    <a class="btn btn-danger" asp-controller="Post" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash3-fill"></i></a>
-                </td>
-            </tr>
-    }
-    </table>
-   
-</div>
+            </div>
+        }else {
+            <section class="recent-posts">
+                <h2>@Model.Owner.FirstName @Model.Owner.LastName</h2>
+                
+                <hr/>
+                <h4> @Localizer["Pubs"]</h4>
+                <div class="card-columns listrecent">
+                    @foreach (var post in Model.Posts)
+                    {
+                        <!-- begin post -->
+                        <div class="card">
+                            <div class="card-block">
+                                <h2 class="card-title">
+                                    @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, null)
+
+                                </h2>
+                                <h4 class="card-text">
+
+                                </h4>
+                                <div class="metafooter">
+                                    <div class="wrapfooter">
+                                        <span class="author-meta">
+                                            <span class="post-date">@Html.DisplayFor(modelItem => post.Comments.Count) @Localizer["Comment"] @Localizer["et"] @Html.DisplayFor(modelItem => post.Likers.Count) @Localizer["Likes"]</span> <br/>
+                                            <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br/>
+                                            <span class="post-date">@Html.DisplayFor(modelItem => post.DateCreated)</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end post -->
+                    }
+                </div>
+            </section>
+}
+}

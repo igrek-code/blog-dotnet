@@ -124,7 +124,7 @@
         <value />
     </data>
     <data name="Save" xml:space="preserve">
-        <value />
+        <value>Sauvegarder</value>
     </data>
     <data name="Resend" xml:space="preserve">
         <value />
@@ -163,12 +163,33 @@
         <value>Commentaires</value>
     </data>
     <data name="Liked1" xml:space="preserve">
-        <value>Une personne à aimé</value>
+        <value>Une personne a aimé</value>
     </data>
     <data name="NoLikes" xml:space="preserve">
         <value>Aucun j'aime</value>
     </data>
     <data name="Cancel" xml:space="preserve">
         <value>Annuler</value>
+    </data>
+    <data name="Pubs" xml:space="preserve">
+        <value>Publications</value>
+    </data>
+    <data name="Nom" xml:space="preserve">
+        <value>Nom</value>
+    </data>
+    <data name="Owner" xml:space="preserve">
+        <value>Propriétaire</value>
+    </data>
+    <data name="Public" xml:space="preserve">
+        <value>Rendre publique</value>
+    </data>
+    <data name="et" xml:space="preserve">
+        <value>et</value>
+    </data>
+    <data name="Likes" xml:space="preserve">
+        <value>J'aime</value>
+    </data>
+    <data name="sure" xml:space="preserve">
+        <value>Êtes vous sur de vouloir supprimer cette publication ? </value>
     </data>
 </root>

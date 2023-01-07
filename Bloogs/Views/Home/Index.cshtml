@@ -38,7 +38,8 @@
                             <div class="metafooter">
                                 <div class="wrapfooter">
                                     <span class="author-meta">
-                                        <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br />
+                                         <span class="post-date">@Html.DisplayFor(modelItem => post.Comments.Count) @Localizer["Comment"] @Localizer["et"] @Html.DisplayFor(modelItem => post.Likers.Count) @Localizer["Likes"]</span> <br/>
+                                        <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br/>
                                         <span class="post-date">@Html.DisplayFor(modelItem => post.DateCreated)</span>
                                     </span>
                                 </div>
@@ -62,13 +63,11 @@
                             <h2 class="card-title">
                                 @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, null)
                             </h2>
-                            <h4 class="card-text">
-                                @Html.Raw(post.Content)
-                            </h4>
                             <div class="metafooter">
                                 <div class="wrapfooter">
                                     <span class="author-meta">
-                                        <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br />
+                                         <span class="post-date">@Html.DisplayFor(modelItem => post.Comments.Count) @Localizer["Comment"] @Localizer["et"] @Html.DisplayFor(modelItem => post.Likers.Count) @Localizer["Likes"]</span> <br/>
+                                        <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br/>
                                         <span class="post-date">@Html.DisplayFor(modelItem => post.DateCreated)</span>
                                     </span>
                                 </div>
@@ -92,13 +91,11 @@
                             <h2 class="card-title">
                                 @Html.ActionLink(post.Title, "Details", "Post", new { id = post.Id }, null)
                             </h2>
-                            <h4 class="card-text">
-                                @Html.Raw(post.Content)
-                            </h4>
                             <div class="metafooter">
                                 <div class="wrapfooter">
                                     <span class="author-meta">
-                                        <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br />
+                                         <span class="post-date">@Html.DisplayFor(modelItem => post.Comments.Count) @Localizer["Comment"] @Localizer["et"] @Html.DisplayFor(modelItem => post.Likers.Count) @Localizer["Likes"]</span> <br/>
+                                        <span class="post-name">@Html.DisplayFor(modelItem => post.Poster.FirstName)</span><br/>
                                         <span class="post-date">@Html.DisplayFor(modelItem => post.DateCreated)</span>
                                     </span>
                                 </div>

@@ -333,4 +333,25 @@
   <data name="NoLikes" xml:space="preserve">
     <value>No likes</value>
   </data>
+  <data name="Pubs" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="Nom" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Make public</value>
+  </data>
+  <data name="et" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="sure" xml:space="preserve">
+    <value>Are you sure you want to delete thispost ?</value>
+  </data>
 </root>

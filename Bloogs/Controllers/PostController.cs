@@ -15,6 +15,7 @@ using Bloogs.Views.Blog;
 namespace Bloogs.Controllers
 {
     [Authorize(Roles = "Admin, User, Supervisor")]
+
     public class PostController : Controller
     {
         private readonly AppDbContext _context;
@@ -34,6 +35,7 @@ namespace Bloogs.Controllers
         }
 
         // GET: Post/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Post == null)
@@ -85,7 +87,7 @@ namespace Bloogs.Controllers
             _context.Update(blog);
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
-            return RedirectToAction("UserBlog", "Blog");
+            return RedirectToAction("UserBlog", "Blog", new {@id=post.blog.Id});
         }
 
         // GET: Post/Edit/5
@@ -131,7 +133,7 @@ namespace Bloogs.Controllers
                     newPost.Title = post.Title;
                     _context.Update(newPost);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction("UserBlog", "Blog");
+                    return RedirectToAction("UserBlog", "Blog", new {@id=post.blog.Id});
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -197,15 +199,23 @@ namespace Bloogs.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Post'  is null.");
             }
-            var post = await _context.Post.Include(p => p.Comments).FirstOrDefaultAsync();
+            //C'est la descente aux enfers !
+            var post = await _context.Post
+                .Include(p => p.blog)
+                .Include(po=> po.Poster)
+                .Include(c => c.Comments).FirstOrDefaultAsync(pos => pos.Id == id);
+            
+            var blog = post.blog;
+            blog.Posts.Remove(post);
             if (post != null)
             {
                 //_context.Comment.RemoveRange(post.Comments);
                 _context.Post.Remove(post);
+                _context.Blog.Update(blog);
             }
-            
+            //Vous avez atteint le fond !
             await _context.SaveChangesAsync();
-            return RedirectToAction("UserBlog", "Blog");
+            return RedirectToAction("UserBlog", "Blog", new {@id=blog.Id});
         }
 
         private bool PostExists(int id)

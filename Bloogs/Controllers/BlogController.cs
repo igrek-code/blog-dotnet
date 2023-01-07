@@ -19,19 +19,27 @@ namespace Bloogs.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public BlogController(AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
+        public BlogController(AppDbContext context, UserManager<User> userManager, RoleManager<IdentityRole> roleManager, SignInManager<User> signInManager)
         {
             _context = context;
             _userManager = userManager;
             _roleManager = roleManager;
+            _signInManager = signInManager; 
         }
         
         // GET: Blog
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Blog.ToListAsync());
+            var blogs = await _context.Blog.Include(b => b.Posts)
+                .Include(b => b.Owner).ToListAsync();
+            if (!_signInManager.IsSignedIn(User))
+            {
+                blogs = blogs.FindAll(b => b.IsPublic); 
+            }
+              return View(blogs);
         }
         
         // GET: Blog/Details/5
@@ -60,19 +68,23 @@ namespace Bloogs.Controllers
         }
         
         
-        // GET: Blog/UserBlog
-        public async Task<IActionResult> UserBlog()
+        // GET: Blog/UserBlog/8
+        public async Task<IActionResult> UserBlog(int id)
         {
-            
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            
-            var blog = await _context.Blog.Include(b => b.Posts).ThenInclude(p => p.Comments)
-                .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
+            if (id == null || _context.Blog == null)
+            {
+                return NotFound();
+            }
+
+            var blog = await _context.Blog.Include(b1 => b1.Owner)
+                .Include(b => b.Posts)
+                .ThenInclude(p => p.Comments).Include(b2=> b2.Posts).ThenInclude(l=>l.Likers)
+                .FirstOrDefaultAsync(bl => bl.Id == id);
             if (blog == null)
             {
                 return NotFound();
             }
-            blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
+           // blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
 
             return View(blog);
         }
