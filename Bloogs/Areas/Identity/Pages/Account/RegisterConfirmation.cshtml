@@ -1,10 +1,13 @@
 ﻿@page
 @model RegisterConfirmationModel
+@using Microsoft.Extensions.Localization
+@using Bloogs
+@inject IStringLocalizer<Bloogs> Localizer
 @{
-    ViewData["Title"] = "Register confirmation";
+    ViewData["Title"] = @Localizer["Register confirmation"];
 }
 
 <h1>@ViewData["Title"]</h1>
 <p>
-        Please check your email to confirm your account.
+        @Localizer["check"]
 </p>

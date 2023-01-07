@@ -187,7 +187,7 @@
     <value>Phone Number</value>
   </data>
   <data name="Privacy" xml:space="preserve">
-    <value>Privacy</value>
+    <value>Team</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profile</value>
@@ -311,5 +311,59 @@
   </data>
 	<data name="Welcome" xml:space="preserve">
     <value>Welcome</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Liked" xml:space="preserve">
+    <value>persons liked</value>
+  </data>
+  <data name="Like" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="Envoyer" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="Liked1" xml:space="preserve">
+    <value>One person liked</value>
+  </data>
+  <data name="NoLikes" xml:space="preserve">
+    <value>No likes</value>
+  </data>
+  <data name="Pubs" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="Nom" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Owner</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Make public</value>
+  </data>
+  <data name="et" xml:space="preserve">
+    <value>and</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>Like</value>
+  </data>
+  <data name="sure" xml:space="preserve">
+    <value>Are you sure you want to delete thispost ?</value>
+  </data>
+  <data name="Register confirmation" xml:space="preserve">
+    <value>Register confirmation</value>
+  </data>
+  <data name="check" xml:space="preserve">
+    <value>Please check your email to confirm your account.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm email</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>Thank you for your confirmation!</value>
   </data>
 </root>

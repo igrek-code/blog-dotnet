@@ -1,5 +1,6 @@
 ﻿@using Bloogs
 @using Bloogs.Controllers
+@using Bloogs.Data;
 @using Microsoft.AspNetCore.Identity;
 @using Microsoft.AspNetCore.Mvc.TagHelpers
 @using Microsoft.Extensions.Localization
@@ -8,6 +9,8 @@
 @inject IStringLocalizer<Bloogs> Localizer
 @inject IOptions<RequestLocalizationOptions> LocOptions
 @inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+@inject AppDbContext context
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,17 +18,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Blog</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="_content/Syncfusion.Blazor.Themes/bootstrap5.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Blogs.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/lib/bootstrap-icons/bootstrap-icons.css" />
     <script src="~/js/tinymce/tinymce.min.js" referrerpolicy="origin"></script>
     @RenderSection("mediumish", false)
 </head>
-<body>
-    <header>
+<>
+    <header id="header">
+        <div class="fixed-top">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Bloogs</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" style="font-size: 50px; font-family: 'Brush Script MT';">Bloogs</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +43,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Index">@Localizer["Blog"]</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="Index">@Localizer["Blogs"]</a>
                         </li>
                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("Supervisor"))
                         {
@@ -47,11 +51,17 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Supervisor" asp-action="Index">@Localizer["Supervisor"]</a>
                             </li>
                         }
-                         @if (SignInManager.IsSignedIn(User) && User.IsInRole("User"))
-                         {
-                             <li class="nav-item">
-                                 <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="UserBlog">@Localizer["Myblog"]</a>
-                             </li>
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            var userId = UserManager.GetUserId(User);
+                            if(userId != null){
+                                var blog = context.Blog.FirstOrDefault(m => m.Owner.Id == userId);
+                                if(blog != null) {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="Blog" asp-action="UserBlog" asp-route-id="@blog.Id">@Localizer["Myblog"]</a>
+                                    </li>
+                                }
+                            }
                          }
                     </ul>
                 </div>
@@ -66,22 +76,24 @@
                 </div>
             </div>
         </nav>
+        </div>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" style="margin-top:8%; margin-bottom: 9%">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted" style="bottom:0; position: absolute; height: 100px;">
-        <div class="container">
-            &copy; 2022 - Bloogs - <a asp-area="" asp-controller="Home" asp-action="Privacy">@Localizer["Privacy"]</a>
-        </div>
+    <footer class="border-top footer text-muted" style="bottom:0; position: fixed; width : 100%; background-color: black; height: 8%;">
+         <div class="body-container">
+                     <h2 style="margin-top: 10px; text-align: center; color: white; font-family:'Brush Script MT'; font-size: 50px"> BLOOGS</h2> 
+                    
+                </div>
         
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-</body>
+
 </html>

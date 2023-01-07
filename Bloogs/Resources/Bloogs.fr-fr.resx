@@ -187,7 +187,7 @@
     <value>Numéro de téléphone</value>
   </data>
   <data name="Privacy" xml:space="preserve">
-    <value>Confidentialité</value>
+    <value>Equipe</value>
   </data>
   <data name="Profile" xml:space="preserve">
     <value>Profil</value>
@@ -311,5 +311,59 @@
   </data>
 	<data name="Welcome" xml:space="preserve">
     <value>Bienvenue</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Modifier</value>
+  </data>
+  <data name="Liked" xml:space="preserve">
+    <value>personnes ont aimé</value>
+  </data>
+  <data name="Like" xml:space="preserve">
+    <value>Aimer</value>
+  </data>
+  <data name="Envoyer" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Commentaires</value>
+  </data>
+  <data name="NoLikes" xml:space="preserve">
+    <value>Aucun j'aime</value>
+  </data>
+  <data name="Liked1" xml:space="preserve">
+    <value>Une personne a aimé</value>
+  </data>
+  <data name="Pubs" xml:space="preserve">
+    <value>Publications</value>
+  </data>
+  <data name="Nom" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Owner" xml:space="preserve">
+    <value>Propriétaire</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Rendre publique</value>
+  </data>
+  <data name="et" xml:space="preserve">
+    <value>et</value>
+  </data>
+  <data name="Likes" xml:space="preserve">
+    <value>J'aime</value>
+  </data>
+  <data name="sure" xml:space="preserve">
+    <value>Êtes vous sur de vouloir supprimer cette publication ? </value>
+  </data>
+  <data name="Register confirmation" xml:space="preserve">
+    <value>Confirmation d'inscription</value>
+  </data>
+  <data name="check" xml:space="preserve">
+    <value>Veuillez vérifier votre adresse mail pour confirmer votre compte</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmation de l'email</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>Merci pour votre confirmation!</value>
   </data>
 </root>

@@ -13,6 +13,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Bloogs.Entities;
+using MailKit.Security;
+using MimeKit.Text;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace Bloogs.Areas.Identity.Pages.Account.Manage
 {
@@ -124,10 +128,23 @@ namespace Bloogs.Areas.Identity.Pages.Account.Manage
                     pageHandler: null,
                     values: new { area = "Identity", userId = userId, email = Input.NewEmail, code = code },
                     protocol: Request.Scheme);
-                await _emailSender.SendEmailAsync(
-                    Input.NewEmail,
-                    "Confirm your email",
-                    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                //Setup email message
+                var emailMessage = new MimeMessage();
+                emailMessage.From.Add(MailboxAddress.Parse("from_address@example.com"));
+                emailMessage.To.Add(MailboxAddress.Parse(Input.NewEmail));
+                emailMessage.Subject = "Confirmation to update your Email";
+                emailMessage.Body = new TextPart(TextFormat.Html)
+                {
+                    Text =
+                    "Please confirm your account by <a href=\"" + HtmlEncoder.Default.Encode(callbackUrl) + "\">clicking here</a>."
+                };
+
+                // send email
+                using var smtp = new SmtpClient();
+                smtp.Connect("localhost", 1025, SecureSocketOptions.Auto);
+                smtp.Send(emailMessage);
+                smtp.Disconnect(true);
 
                 StatusMessage = "Confirmation link to change email sent. Please check your email.";
                 return RedirectToPage();

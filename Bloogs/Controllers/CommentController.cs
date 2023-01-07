@@ -7,26 +7,32 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
+using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace Bloogs.Controllers
 {
+    [Authorize(Roles = "Admin, User, Supervisor")]
     public class CommentController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public CommentController(AppDbContext context)
+        public CommentController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager; 
         }
 
-        // GET: Comment
+        /*// GET: Comment
         public async Task<IActionResult> Index()
         {
               return View(await _context.Comment.ToListAsync());
-        }
+        }*/
 
         // GET: Comment/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /*public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Comment == null)
             {
@@ -48,24 +54,34 @@ namespace Bloogs.Controllers
         {
             return View();
         }
+        */
 
         // POST: Comment/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content")] Comment comment)
+        public async Task<IActionResult> Create([Bind("Id,Content")] Comment comment, int id)
         {
-            if (ModelState.IsValid)
+            if (comment != null && !comment.Content.Equals(""))
             {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                var post = await _context.Post.Include(post1 => post1.Poster)
+                    .Include(post1 => post1.blog)
+                    .Include(post1 => post1.Comments)
+                    .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
+                comment.Owner = user; 
+                post.Comments.Add(comment);
                 _context.Add(comment);
+                _context.Update(post);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Post", new {@id=post.Id});
             }
             return View(comment);
         }
 
         // GET: Comment/Edit/5
+        /*
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Comment == null)
@@ -152,10 +168,11 @@ namespace Bloogs.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        */
 
-        private bool CommentExists(int id)
+        /*private bool CommentExists(int id)
         {
           return _context.Comment.Any(e => e.Id == id);
-        }
+        }*/
     }
 }

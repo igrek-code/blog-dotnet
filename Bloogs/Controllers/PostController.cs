@@ -8,10 +8,15 @@ using Microsoft.EntityFrameworkCore;
 using Bloogs.Models;
 using Bloogs.Data;
 using Bloogs.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Bloogs.Views.Blog;
+using System.Reflection.Metadata;
 
 namespace Bloogs.Controllers
 {
+    [Authorize(Roles = "Admin, User, Supervisor")]
+
     public class PostController : Controller
     {
         private readonly AppDbContext _context;
@@ -31,6 +36,7 @@ namespace Bloogs.Controllers
         }
 
         // GET: Post/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Post == null)
@@ -38,11 +44,19 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post
-                .FirstOrDefaultAsync(m => m.Id == id);
+
+            var post = await _context.Post.Include(post1 => post1.Poster)
+                .Include(post1 => post1.blog)
+                .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
+                .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
             if (post == null)
             {
                 return NotFound();
+            }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null && !post.blog.IsPublic)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
             }
 
             return View(post);
@@ -59,13 +73,12 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Content,ImagesUrl")] Post post)
+        public async Task<IActionResult> Create([Bind("Id,Content,Title")] Post post)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
             var blog = await _context.Blog
                 .FirstOrDefaultAsync(m => m.Owner.Id == user.Id);
-            post.Title = "";
             post.Poster = user;
             post.DateCreated = DateTime.Now;
             if (post == null && post.Content.Equals(("")))
@@ -82,7 +95,7 @@ namespace Bloogs.Controllers
             _context.Update(blog);
             await _context.SaveChangesAsync();
             //return RedirectToAction(nameof(Index));
-            return RedirectToAction("UserBlog", "Blog");
+            return RedirectToAction("UserBlog", "Blog", new {@id=post.blog.Id});
         }
 
         // GET: Post/Edit/5
@@ -93,7 +106,10 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post.FindAsync(id);
+            var post = await _context.Post.Include(post1 => post1.Poster)
+                .Include(post1 => post1.blog)
+                .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
+                .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
             if (post == null)
             {
                 return NotFound();
@@ -106,19 +122,26 @@ namespace Bloogs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Content,ImagesUrl")] Post post)
+        public async Task<IActionResult> Edit(int id, Post post)
         {
             if (id != post.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (post != null && !post.Content.Equals(("")))
             {
                 try
                 {
-                    _context.Update(post);
+                    var newPost = await _context.Post.Include(post1 => post1.Poster)
+                        .Include(post1 => post1.blog)
+                        .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
+                        .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
+                    newPost.Content = post.Content;
+                    newPost.Title = post.Title;
+                    _context.Update(newPost);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction("UserBlog", "Blog", new {@id=post.blog.Id});
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -131,7 +154,6 @@ namespace Bloogs.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(post);
         }
@@ -144,7 +166,7 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post
+            var post = await _context.Post.Include(p => p.Poster)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
@@ -152,6 +174,28 @@ namespace Bloogs.Controllers
             }
 
             return View(post);
+        }
+        
+        // POST: Post/Like/5
+        public async Task<IActionResult> Like(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var post = await _context.Post.Include(post1 => post1.Poster)
+                    .Include(post1 => post1.blog)
+                    .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
+                    .Include(post1 => post1.Likers).FirstOrDefaultAsync(post1 => post1.Id == id );
+            if (post == null)
+            {
+                return NotFound();
+            }
+            post.Likers?.Add(user);
+            _context.Update(post);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "Post", new {@id=post.Id});
         }
 
         // POST: Post/Delete/5
@@ -163,14 +207,23 @@ namespace Bloogs.Controllers
             {
                 return Problem("Entity set 'AppDbContext.Post'  is null.");
             }
-            var post = await _context.Post.FindAsync(id);
+            //C'est la descente aux enfers !
+            var post = await _context.Post
+                .Include(p => p.blog)
+                .Include(po=> po.Poster)
+                .Include(c => c.Comments).FirstOrDefaultAsync(pos => pos.Id == id);
+            
+            var blog = post.blog;
+            blog.Posts.Remove(post);
             if (post != null)
             {
+                //_context.Comment.RemoveRange(post.Comments);
                 _context.Post.Remove(post);
+                _context.Blog.Update(blog);
             }
-            
+            //Vous avez atteint le fond !
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("UserBlog", "Blog", new {@id=blog.Id});
         }
 
         private bool PostExists(int id)

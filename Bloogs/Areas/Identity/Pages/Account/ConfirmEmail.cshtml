@@ -1,7 +1,11 @@
 ﻿@page
 @model ConfirmEmailModel
+@using Microsoft.Extensions.Localization
+@using Bloogs
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject IStringLocalizer<Bloogs> Localizer
 @{
-    ViewData["Title"] = "Confirm email";
+    ViewData["Title"] = @Localizer["Confirm"];
 }
 
 <h1>@ViewData["Title"]</h1>

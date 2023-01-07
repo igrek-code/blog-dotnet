@@ -6,10 +6,11 @@ namespace Bloogs.Models;
 public class Post
 {
     public int Id { get; set; }
-    [DataType(DataType.MultilineText)]
+    [DataType(DataType.MultilineText), Required]
+    
     public string Content { get; set; }
     public virtual Blog blog { get; set; }
-
+     [Required]
     public string Title { get; set; }
     public User Poster { get; set; }
     public List<Comment>? Comments { get; set; }
