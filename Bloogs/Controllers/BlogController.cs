@@ -56,6 +56,12 @@ namespace Bloogs.Controllers
             {
                 return NotFound();
             }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if(user == null && !blog.IsPublic)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+
+            }
 
             return View(blog);
         }
@@ -84,7 +90,12 @@ namespace Bloogs.Controllers
             {
                 return NotFound();
             }
-           // blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
+            // blog.Posts = await _context.Post.Where(p => p.blog.Id == blog.Id).ToListAsync(); 
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null && !blog.IsPublic)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
 
             return View(blog);
         }

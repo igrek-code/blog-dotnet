@@ -11,6 +11,7 @@ using Bloogs.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Bloogs.Views.Blog;
+using System.Reflection.Metadata;
 
 namespace Bloogs.Controllers
 {
@@ -43,6 +44,7 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
+
             var post = await _context.Post.Include(post1 => post1.Poster)
                 .Include(post1 => post1.blog)
                 .Include(post1 => post1.Comments).ThenInclude(c => c.Owner)
@@ -51,6 +53,12 @@ namespace Bloogs.Controllers
             {
                 return NotFound();
             }
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user == null && !post.blog.IsPublic)
+            {
+                return RedirectToPage("/Account/AccessDenied", new { area = "Identity" });
+            }
+
             return View(post);
         }
 
