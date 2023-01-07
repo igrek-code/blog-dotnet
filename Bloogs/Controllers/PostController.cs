@@ -158,7 +158,7 @@ namespace Bloogs.Controllers
                 return NotFound();
             }
 
-            var post = await _context.Post
+            var post = await _context.Post.Include(p => p.Poster)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (post == null)
             {
