@@ -354,4 +354,16 @@
   <data name="sure" xml:space="preserve">
     <value>Êtes vous sur de vouloir supprimer cette publication ? </value>
   </data>
+  <data name="Register confirmation" xml:space="preserve">
+    <value>Confirmation d'inscription</value>
+  </data>
+  <data name="check" xml:space="preserve">
+    <value>Veuillez vérifier votre adresse mail pour confirmer votre compte</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirmation de l'email</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>Merci pour votre confirmation!</value>
+  </data>
 </root>

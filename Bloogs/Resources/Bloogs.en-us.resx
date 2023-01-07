@@ -354,4 +354,16 @@
   <data name="sure" xml:space="preserve">
     <value>Are you sure you want to delete thispost ?</value>
   </data>
+  <data name="Register confirmation" xml:space="preserve">
+    <value>Register confirmation</value>
+  </data>
+  <data name="check" xml:space="preserve">
+    <value>Please check your email to confirm your account.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm email</value>
+  </data>
+  <data name="Thanks" xml:space="preserve">
+    <value>Thank you for your confirmation!</value>
+  </data>
 </root>

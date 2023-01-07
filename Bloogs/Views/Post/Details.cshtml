@@ -64,11 +64,10 @@
                 <span ><i class="bi bi-hand-thumbs-up-fill" style="font-size: 30px;"></i></span>
                 <br/>
             }
-
+            <hr/>
             <form asp-controller="Comment" asp-action="Create" asp-route-id="@Model?.Id">
                 <div asp-validation-summary="ModelOnly" class="text-danger"> </div>
                 <div class="form-outline mb-4">
-                    <label class="form-label h4">@Localizer["Comment"]</label>
                     <div>
                         @{
                             var comment = new Comment();
@@ -81,8 +80,8 @@
             </form>
         }
     }
-
-
+<hr/>
+<label class="form-label h4">@Localizer["Comment"]</label> <br/>
 
     @foreach (var comment in Model.Comments)
     {

@@ -25,14 +25,14 @@ namespace Bloogs.Controllers
             _userManager = userManager; 
         }
 
-        // GET: Comment
+        /*// GET: Comment
         public async Task<IActionResult> Index()
         {
               return View(await _context.Comment.ToListAsync());
-        }
+        }*/
 
         // GET: Comment/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /*public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Comment == null)
             {
@@ -54,6 +54,7 @@ namespace Bloogs.Controllers
         {
             return View();
         }
+        */
 
         // POST: Comment/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
@@ -80,6 +81,7 @@ namespace Bloogs.Controllers
         }
 
         // GET: Comment/Edit/5
+        /*
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Comment == null)
@@ -166,10 +168,11 @@ namespace Bloogs.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        */
 
-        private bool CommentExists(int id)
+        /*private bool CommentExists(int id)
         {
           return _context.Comment.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
